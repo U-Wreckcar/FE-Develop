@@ -1,0 +1,10 @@
+{
+  "printWidth": 80,
+  "tapWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "parser": "typescript",
+  "semi": true,
+  "bracketSpacing": true
+}
