@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { SideNav } from '../components/bar/sideBar/SideNav';
-
-interface sideBarProp {
-  isSideBar: boolean;
-}
+import { SideNav } from 'components/bar/sideBar/SideNav';
 
 export const Root = () => {
   return (
