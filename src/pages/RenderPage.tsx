@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default function RenderPage() {
-  return <div></div>;
+function RenderPage() {
+  return <div>renderPage</div>;
 }
+
+export default RenderPage;

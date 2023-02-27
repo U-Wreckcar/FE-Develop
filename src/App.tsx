@@ -1,7 +1,7 @@
 import './App.css';
-
+import { SideNav } from './components/bar/sideBar/SideNav';
 function App() {
-  return <div className="App"></div>;
+  return <></>;
 }
 
 export default App;

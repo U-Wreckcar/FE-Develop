@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function UserPage() {
-  return <div></div>;
+  return <div>유저정보</div>;
 }
