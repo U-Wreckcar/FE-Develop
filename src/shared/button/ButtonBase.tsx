@@ -5,7 +5,11 @@ interface propsBtn {
   label?: string;
   fnName?: () => void;
 }
-export const Button: React.FC<propsBtn> = ({ styleName, label, fnName }) => {
+export const ButtonBase: React.FC<propsBtn> = ({
+  styleName,
+  label,
+  fnName,
+}) => {
   return (
     <>
       <button className={styleName} onClick={fnName}>
