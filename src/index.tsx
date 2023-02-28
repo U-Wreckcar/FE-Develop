@@ -5,7 +5,6 @@ import 'index.css';
 import App from './App';
 // import store from 'redux/store/store';
 import { Provider } from 'react-redux';
-import { ShortenUrlProvider } from 'react-shorten-url';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,8 +12,6 @@ const root = ReactDOM.createRoot(
 root.render(
   // <Provider store={store}>
   <>
-    <ShortenUrlProvider config={{ accessToken: 'bitly_access_token' }} />
-    <RouterProvider router={router} />
     <App />
   </>,
   // </Provider>,

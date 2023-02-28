@@ -20,7 +20,6 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "react-shorten-url": "^1.0.5",
     "style-loader": "^3.3.1"
   },
   "scripts": {
