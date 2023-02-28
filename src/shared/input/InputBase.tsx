@@ -13,9 +13,12 @@ export const InputBase: React.FC<propsInput> = ({
   submitFn,
 }) => {
   return (
-    <form onSubmit={submitFn}>
+    <>
       <label>{label}</label>
       <input ref={inputRef} />
-    </form>
+      {/* <button>생성버튼</button>
+      <form onSubmit={submitFn}>
+      </form> */}
+    </>
   );
 };
