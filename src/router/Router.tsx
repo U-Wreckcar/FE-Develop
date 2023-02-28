@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import CreatePage from 'pages/CreatePage';
 import MainPage from 'pages/MainPage';
@@ -15,12 +14,9 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <RenderPage /> },
       { path: '/main', element: <MainPage /> },
+      { path: '/main/:mainid', element: <MainPage /> },
       { path: '/createutm', element: <CreatePage /> },
       { path: '/userinfo', element: <UserPage /> },
     ],
-  },
-
-  {
-    element: <UserPage />,
   },
 ]);
