@@ -2,6 +2,7 @@ import React, { FormEvent, useRef, useState } from 'react';
 import { ButtonBase } from 'shared/button/ButtonBase';
 import { InputBase } from 'shared/input/InputBase';
 import styles from './CreateUtm.module.css';
+import ShortenUrl from './ShortenUrl';
 export const CreateUtm = () => {
   const [utmFullName, setUtmFullName] = useState('');
   const urlRef = useRef<HTMLInputElement>(null);
@@ -119,6 +120,7 @@ export const CreateUtm = () => {
       <div className={styles.button_containel}>
         <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
       </div>
+      <ShortenUrl />
     </form>
   );
 };
