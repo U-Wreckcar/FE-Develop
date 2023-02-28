@@ -25,7 +25,19 @@ export const CreateUtm = () => {
   };
   const createSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log('ehlsk?');
+    const urlInput = urlRef.current?.value;
+    const CampaignIdInput = campaignIdRef.current?.value;
+    const sourceIdInput = sourceRef.current?.value;
+    const mediumIdInput = mediumRef.current?.value;
+    const campaignNameIdInput = campaignNameRef.current?.value;
+    const campaignKeyWord = campaignKeyWordRef.current?.value;
+    const campaignTerm = campaignTermRef.current?.value;
+    const memoIdInput = memoRef.current?.value;
+
+    setUtmFullName(
+      `${urlInput}?utm_campaign_id=${CampaignIdInput}${sourceIdInput}${mediumIdInput}${campaignNameIdInput}${campaignKeyWord}${campaignTerm}${memoIdInput}`,
+    );
+    alert('생성 완료!');
   };
   const createHandler = () => {
     const urlInput = urlRef.current?.value;
@@ -36,16 +48,15 @@ export const CreateUtm = () => {
     const campaignKeyWord = campaignKeyWordRef.current?.value;
     const campaignTerm = campaignTermRef.current?.value;
     const memoIdInput = memoRef.current?.value;
-    console.log(urlInput);
 
     setUtmFullName(
       `${urlInput}?utm_campaign_id=${CampaignIdInput}${sourceIdInput}${mediumIdInput}${campaignNameIdInput}${campaignKeyWord}${campaignTerm}${memoIdInput}`,
     );
   };
-  const addInput = () => {};
   console.log(utmFullName);
+  const addInput = () => {};
   return (
-    <section className={styles.section}>
+    <form className={styles.section}>
       <div>
         <h1 className={styles.title}>UTM 생성하기</h1>
       </div>
@@ -98,15 +109,16 @@ export const CreateUtm = () => {
           inputRef={memoRef}
           label={inputLabel.memo}
         />
-      </div>
-      <div className={styles.button_containel}>
-        <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
         <ButtonBase
           styleName={'createBtn'}
           label={'생성하기'}
-          fnName={createHandler}
+          //   types={'submit'}
+          //   fnName={createHandler}
         />
       </div>
-    </section>
+      <div className={styles.button_containel}>
+        <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
+      </div>
+    </form>
   );
 };
