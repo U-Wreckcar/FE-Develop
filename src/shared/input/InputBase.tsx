@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 interface propsInput {
   styleName?: string;
   label?: string;
-  fnName?: () => void;
+  submitFn?: (even: FormEvent) => void;
   inputRef: React.RefObject<HTMLInputElement>;
 }
 
@@ -10,10 +10,10 @@ export const InputBase: React.FC<propsInput> = ({
   styleName,
   label,
   inputRef,
-  fnName,
+  submitFn,
 }) => {
   return (
-    <form>
+    <form onSubmit={submitFn}>
       <label>{label}</label>
       <input ref={inputRef} />
     </form>
