@@ -3,7 +3,8 @@ import React from 'react';
 interface propsBtn {
   styleName?: string;
   label?: string;
-  fnName?: () => void;
+  fnName?: (event: React.FormEvent) => void;
+  onClickHadelr?: () => void;
 }
 export const ButtonBase: React.FC<propsBtn> = ({
   styleName,
