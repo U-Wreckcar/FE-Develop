@@ -1,10 +1,12 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import { ButtonBase } from 'shared/button/ButtonBase';
 import { InputBase } from 'shared/input/InputBase';
 import styles from './CreateUtm.module.css';
 import ShortenUrl from './ShortenUrl';
 export const CreateUtm = () => {
   const [utmFullName, setUtmFullName] = useState('');
+  const [makedUtm, setMakeUtm] = useState({});
   const urlRef = useRef<HTMLInputElement>(null);
   const campaignIdRef = useRef<HTMLInputElement>(null);
   const sourceRef = useRef<HTMLInputElement>(null);
@@ -24,7 +26,7 @@ export const CreateUtm = () => {
     campaign_term: 'campaign_term',
     memo: '메모',
   };
-  const createSubmit = (event: FormEvent) => {
+  const createSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const urlInput = urlRef.current?.value;
     const CampaignIdInput = campaignIdRef.current?.value;
@@ -34,30 +36,38 @@ export const CreateUtm = () => {
     const campaignKeyWord = campaignKeyWordRef.current?.value;
     const campaignTerm = campaignTermRef.current?.value;
     const memoIdInput = memoRef.current?.value;
-
     setUtmFullName(
-      `${urlInput}?utm_campaign_id=${CampaignIdInput}${sourceIdInput}${mediumIdInput}${campaignNameIdInput}${campaignKeyWord}${campaignTerm}${memoIdInput}`,
+      `${urlInput}?utm_campaign_id=${CampaignIdInput}&${sourceIdInput}${mediumIdInput}${campaignNameIdInput}${campaignKeyWord}${campaignTerm}${memoIdInput}`
     );
-    alert('생성 완료!');
+    setMakeUtm({
+      url_name: urlInput,
+      campaign_id: CampaignIdInput,
+      source: sourceIdInput,
+      medium: mediumIdInput,
+      campaign_name: campaignNameIdInput,
+      campaign_key_word: campaignKeyWord,
+      campaign_term: campaignTerm,
+      memo: memoIdInput,
+      utm: utmFullName,
+    });
+    // alert('생성 완료!');
   };
-  const createHandler = () => {
-    const urlInput = urlRef.current?.value;
-    const CampaignIdInput = campaignIdRef.current?.value;
-    const sourceIdInput = sourceRef.current?.value;
-    const mediumIdInput = mediumRef.current?.value;
-    const campaignNameIdInput = campaignNameRef.current?.value;
-    const campaignKeyWord = campaignKeyWordRef.current?.value;
-    const campaignTerm = campaignTermRef.current?.value;
-    const memoIdInput = memoRef.current?.value;
 
-    setUtmFullName(
-      `${urlInput}?utm_campaign_id=${CampaignIdInput}${sourceIdInput}${mediumIdInput}${campaignNameIdInput}${campaignKeyWord}${campaignTerm}${memoIdInput}`,
-    );
+  const addInput = () => {
+    postUtm();
   };
-  console.log(utmFullName);
-  const addInput = () => {};
+
+  const postUtm = async () => {
+    console.log(makedUtm);
+    const res = await axios.post('data/utmMock.json', makedUtm);
+    console.log(res);
+    // return res;
+  };
+  useEffect(() => {
+    // getUtm();
+  }, []);
   return (
-    <form className={styles.section}>
+    <div className={styles.section}>
       <div>
         <h1 className={styles.title}>UTM 생성하기</h1>
       </div>
@@ -110,17 +120,20 @@ export const CreateUtm = () => {
           inputRef={memoRef}
           label={inputLabel.memo}
         />
+      </div>
+      <div className={styles.button_containel}>
         <ButtonBase
           styleName={'createBtn'}
           label={'생성하기'}
-          //   types={'submit'}
-          //   fnName={createHandler}
+          fnName={createSubmit}
         />
-      </div>
-      <div className={styles.button_containel}>
         <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
       </div>
+<<<<<<< HEAD
+    </div>
+=======
       <ShortenUrl />
     </form>
+>>>>>>> origin/develop
   );
 };

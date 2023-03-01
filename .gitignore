@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/src/async/api/utmMock.json
+/public/data/utmMock.json
 # testing
 /coverage
 
