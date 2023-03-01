@@ -3,24 +3,22 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from 'router/Router';
 import 'index.css';
 import App from './App';
-// import store from 'redux/store/store';
+import { store } from 'redux/store/store';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
+  document.getElementById('root') as HTMLElement
 );
 
 const queryClient = new QueryClient();
 root.render(
-  // <Provider store={store}>
   <>
-    <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
       <RouterProvider router={router} />
       <App />
-    </QueryClientProvider>
-  </>,
-  // </Provider>,
+    </Provider>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
