@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ShortenUrl = () => {
   const [short, setShort] = useState('');
+  const [show, setShow] = useState(false);
+  const inputRef = useRef(null);
+
+  const data = 'memo/memo/memomemo/memo/memo';
   const url =
     "https://www.figma.com/file/jpQ8JmlY73uE4TMC2EsNXQ/U%EB%A0%89%EC%B9%B4's-W.F?node-id=46%3A71&t=OpT5AtzT6k5LoP8g-0";
 
@@ -42,6 +46,12 @@ const ShortenUrl = () => {
       <div>
         <button onClick={onClickCopyButton}>복사하기</button>
       </div>
+
+      {show && inputRef !== null ? (
+        <textarea value={data} onBlur={() => setShow(false)} />
+      ) : (
+        <input value={data} ref={inputRef} onFocus={() => setShow(true)} />
+      )}
     </div>
   );
 };
