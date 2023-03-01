@@ -129,11 +129,7 @@ export const CreateUtm = () => {
         />
         <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
       </div>
-<<<<<<< HEAD
-    </div>
-=======
       <ShortenUrl />
-    </form>
->>>>>>> origin/develop
+    </div>
   );
 };
