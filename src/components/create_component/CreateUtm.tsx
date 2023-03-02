@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ButtonBase } from 'shared/button/ButtonBase';
 import { InputBase } from 'shared/input/InputBase';
 import styles from './CreateUtm.module.css';
+import ShortenUrl from './ShortenUrl';
 export const CreateUtm = () => {
   const [utmFullName, setUtmFullName] = useState('');
   const [makedUtm, setMakeUtm] = useState({});
@@ -128,6 +129,7 @@ export const CreateUtm = () => {
         />
         <ButtonBase styleName={'createBtn'} label={'+'} fnName={addInput} />
       </div>
+      <ShortenUrl />
     </div>
   );
 };
