@@ -1,8 +1,6 @@
 const LoginBox = () => {
-  const kakaoUrl =
-    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login';
   const onClickKakaoBtn = () => {
-    window.location.href = kakaoUrl;
+    window.location.href = 'https://fa8e-14-6-160-238.jp.ngrok.io';
   };
   const onClickNaverBtn = () => {
     alert('개발중입니다..!');
