@@ -5,6 +5,7 @@ import RenderPage from 'pages/RenderPage';
 import UserPage from 'pages/UserPage';
 import NotFound from 'shared/page/NotFound';
 import { Root } from './Root';
+import LoginPage from 'pages/LoginPage';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
       { path: '/main/:mainid', element: <MainPage /> },
       { path: '/createutm', element: <CreatePage /> },
       { path: '/userinfo', element: <UserPage /> },
+      { path: '/login', element: <LoginPage /> },
     ],
   },
 ]);
