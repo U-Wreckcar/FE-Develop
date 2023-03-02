@@ -1,9 +1,9 @@
 import { FormEvent, useRef } from 'react';
-import { useAppSelector, useAppDispatch } from 'util/hooks/redux_hook/hook';
+import { useAppSelector, useAppDispatch } from 'util/hooks/selectorDispatch';
 import { today } from 'redux/slice/filterSlice';
 
 export const CalendarModal = () => {
-  const res = useAppSelector((state) => state.filter.dateHist);
+  const dateValue = useAppSelector((state) => state.filter.dateHist);
   const startRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -11,14 +11,12 @@ export const CalendarModal = () => {
   const cenhandler = (event: FormEvent) => {
     event.preventDefault();
     const dateCel = `${startRef.current?.value}~${endRef.current?.value} `;
-    console.log(startRef.current?.value);
-    console.log(endRef.current?.value);
+
     dispatch(today(dateCel));
   };
   return (
     <form onSubmit={cenhandler}>
       <label htmlFor="start">
-        Start
         <input
           ref={startRef}
           type="date"
@@ -29,7 +27,7 @@ export const CalendarModal = () => {
         />
       </label>
       <label htmlFor="end">
-        End
+        <span> ~ </span>
         <input
           ref={endRef}
           type="date"
@@ -40,8 +38,7 @@ export const CalendarModal = () => {
           max="2024-12-31"
         />
       </label>
-      <button>Dispatch</button>
-      <p>{res}</p>
+      <button>✔️</button>
     </form>
   );
 };

@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from 'redux/store/store';
 
 interface FilterState {
-  dateHist: string;
+  dateHist: string | undefined;
 }
 
 const initialState: FilterState = {
@@ -14,7 +14,7 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    today: (state, action: PayloadAction<string>) => {
+    today: (state, action: PayloadAction<string | undefined>) => {
       state.dateHist = action.payload;
     },
   },

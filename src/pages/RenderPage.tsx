@@ -5,7 +5,6 @@ function RenderPage() {
     <div>
       renderPage
       <FilterBox />
-      <CalendarModal />
     </div>
   );
 }
