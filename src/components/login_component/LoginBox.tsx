@@ -9,7 +9,7 @@ const LoginBox = () => {
   };
 
   const onClickGoogleBtn = () => {
-    alert('개발중입니다...!');
+    alert('개발중입니다..!');
   };
   return (
     <div>
