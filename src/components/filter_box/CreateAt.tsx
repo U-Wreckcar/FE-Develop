@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { today } from 'redux/slice/filterSlice';
 import { useAppDispatch } from 'util/hooks/selectorDispatch';
 import { CalendarModal } from './CalendarModal';
-import styles from 'shared/filter_box/createAt.module.css';
+import styles from 'components/filter_box/createAt.module.css';
 export const CreateAt = () => {
   const dataRef = useRef<HTMLInputElement>(null);
   const weekRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ export const CreateAt = () => {
 
   return (
     <div className={styles.container}>
-      <div>생성일자</div>
+      <div className="categoryTilte">생성일자</div>
       <div className={styles.calendarBox}>
         <CalendarModal />
       </div>
