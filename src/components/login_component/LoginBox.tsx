@@ -5,7 +5,7 @@ const LoginBox = () => {
     window.location.href = kakaoUrl;
   };
   const onClickNaverBtn = () => {
-    alert('개발중입니다...!');
+    alert('개발중입니다..!');
   };
 
   const onClickGoogleBtn = () => {
