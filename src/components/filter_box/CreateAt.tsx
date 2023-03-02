@@ -20,7 +20,7 @@ export const CreateAt = () => {
 
   return (
     <div className={styles.container}>
-      <div className="categoryTilte">생성일자</div>
+      <div className="category_tilte">생성일자</div>
       <div className={styles.calendarBox}>
         <CalendarModal />
       </div>
