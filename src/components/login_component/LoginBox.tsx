@@ -1,4 +1,16 @@
 const LoginBox = () => {
+  const kakaoUrl =
+    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login';
+  const onClickKakaoBtn = () => {
+    window.location.href = kakaoUrl;
+  };
+  const onClickNaverBtn = () => {
+    alert('개발중입니다...!');
+  };
+
+  const onClickGoogleBtn = () => {
+    alert('개발중입니다...!');
+  };
   return (
     <div>
       <div>
@@ -7,13 +19,13 @@ const LoginBox = () => {
       </div>
       <div>
         <div>
-          <button>카카오</button>
+          <button onClick={onClickKakaoBtn}>카카오</button>
         </div>
         <div>
-          <button>네이버</button>
+          <button onClick={onClickNaverBtn}>네이버</button>
         </div>
         <div>
-          <button>구글</button>
+          <button onClick={onClickGoogleBtn}>구글</button>
         </div>
       </div>
     </div>
