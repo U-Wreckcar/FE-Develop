@@ -1,0 +1,15 @@
+.category_layout{
+ display: flex;
+}
+.calendarBox{
+    width: 30%;
+    /* background-color: orange; */
+
+
+}
+.buttonBox{
+    width:60%;
+    height: 30px;
+    /* background-color: orange; */
+    margin-left: 20px;
+}

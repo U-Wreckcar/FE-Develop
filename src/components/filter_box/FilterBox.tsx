@@ -1,22 +1,21 @@
 import React from 'react';
-import { CreateAt } from './CreateAt';
-import { Source } from './Source';
-import { Medium } from './Medium';
-import { KeyWord } from './KeyWord';
+import { CreateAt } from 'components/filter_box/category/CreateAt';
+import { Source } from 'components/filter_box/category/Source';
+import { Medium } from 'components/filter_box/category/Medium';
+import { KeyWord } from 'components/filter_box/category/KeyWord';
 import styles from './filterBox.module.css';
 export default function FilterBox() {
   const cadsf = [<CreateAt />, <Source />, <Medium />, <KeyWord />];
 
   return (
     <div className={styles.container}>
-      {cadsf.map((d) => {
+      {cadsf.map((list, idx) => {
         return (
-          <div className={styles.list_item}>
-            <div className="list_item">{d}</div>
+          <div key={idx} className={styles.list_item}>
+            <div className="list_item">{list}</div>
           </div>
         );
       })}
-      <input />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 const LoginBox = () => {
   const kakaoUrl =
-    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login';
+    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login'
   const onClickKakaoBtn = () => {
     window.location.href = kakaoUrl;
   };
