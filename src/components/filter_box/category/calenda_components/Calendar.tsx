@@ -2,7 +2,7 @@ import { FormEvent, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from 'util/hooks/selectorDispatch';
 import { today } from 'redux/slice/filterSlice';
 
-export const CalendarModal = () => {
+export const Calendar = () => {
   const dateValue = useAppSelector((state) => state.filter.dateHist);
   const startRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLInputElement>(null);

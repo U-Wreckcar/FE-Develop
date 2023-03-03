@@ -1,13 +1,12 @@
-import { useRef } from 'react';
-import { today } from 'redux/slice/filterSlice';
+import React, { useRef } from 'react';
 import { useAppDispatch } from 'util/hooks/selectorDispatch';
-import { CalendarModal } from './CalendarModal';
-import styles from 'components/filter_box/createAt.module.css';
-export const CreateAt = () => {
+import { today } from 'redux/slice/filterSlice';
+import styles from './calendarStyles.module.css';
+export const CalendarButtonBox = () => {
+  const dispatch = useAppDispatch();
   const dataRef = useRef<HTMLInputElement>(null);
   const weekRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
-  const dispatch = useAppDispatch();
   const todayHandler = () => {
     dispatch(today(dataRef.current?.value));
   };
@@ -17,13 +16,8 @@ export const CreateAt = () => {
   const monthHandler = () => {
     dispatch(today(monthRef.current?.value));
   };
-
   return (
-    <div className={styles.container}>
-      <div className="category_tilte">생성일자</div>
-      <div className={styles.calendarBox}>
-        <CalendarModal />
-      </div>
+    <div>
       <div className={styles.buttonBox}>
         <input
           datatype="today"

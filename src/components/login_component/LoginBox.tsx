@@ -1,10 +1,9 @@
-import axios from 'axios';
-import styles from './login.module.css';
 const LoginBox = () => {
-  const onClickKakaoBtn = async () => {
-    window.location.href = 'https://dee8-14-6-160-238.jp.ngrok.io/auth/kakao';
+  const kakaoUrl =
+    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login'
+  const onClickKakaoBtn = () => {
+    window.location.href = kakaoUrl;
   };
-
   const onClickNaverBtn = () => {
     alert('개발중입니다..!');
   };
@@ -13,28 +12,20 @@ const LoginBox = () => {
     alert('개발중입니다...!');
   };
   return (
-    <div className={styles.container}>
-      <div className={styles.loginBox}>
-        <div className={styles.textBox}>
-          <h1>Login</h1>
-          <p>U렉카와 함께 쉽고 빠른 업무를 느껴보세요!</p>
+    <div>
+      <div>
+        <h1>Login</h1>
+        <p>U렉카와 함께 쉽고 빠른 업무를 느껴보세요!</p>
+      </div>
+      <div>
+        <div>
+          <button onClick={onClickKakaoBtn}>카카오</button>
         </div>
-        <div className={styles.buttonBox}>
-          <div>
-            <button className={styles.loginButton} onClick={onClickKakaoBtn}>
-              카카오 1초만에 시작하기
-            </button>
-          </div>
-          <div>
-            <button className={styles.loginButton} onClick={onClickNaverBtn}>
-              네이버로 1초만에 시작하기
-            </button>
-          </div>
-          <div>
-            <button className={styles.loginButton} onClick={onClickGoogleBtn}>
-              구글로 1초 만에 시작하기
-            </button>
-          </div>
+        <div>
+          <button onClick={onClickNaverBtn}>네이버</button>
+        </div>
+        <div>
+          <button onClick={onClickGoogleBtn}>구글</button>
         </div>
       </div>
     </div>
