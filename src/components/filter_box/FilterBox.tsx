@@ -1,36 +1,21 @@
-import React, { useEffect } from 'react';
-import { CreateAt } from './CreateAt';
-import { Source } from './Source';
-import { Medium } from './Medium';
-import { KeyWord } from './KeyWord';
+import React from 'react';
+import { CreateAt } from 'components/filter_box/category/CreateAt';
+import { Source } from 'components/filter_box/category/Source';
+import { Medium } from 'components/filter_box/category/Medium';
+import { KeyWord } from 'components/filter_box/category/KeyWord';
 import styles from './filterBox.module.css';
-import axios from 'axios';
-
 export default function FilterBox() {
   const cadsf = [<CreateAt />, <Source />, <Medium />, <KeyWord />];
 
-  const getCode = async () => {
-    if (window.location.search !== '') {
-      const code = window.location.search.split('?code=')[1];
-      await axios.get(
-        `https://dee8-14-6-160-238.jp.ngrok.io/auth/kakao/callback?code=${code}`
-      );
-    }
-  };
-
-  useEffect(() => {
-    getCode();
-  }, []);
   return (
     <div className={styles.container}>
-      {cadsf.map((d) => {
+      {cadsf.map((list, idx) => {
         return (
-          <div className={styles.list_item}>
-            <div className="list_item">{d}</div>
+          <div key={idx} className={styles.list_item}>
+            <div className="list_item">{list}</div>
           </div>
         );
       })}
-      <input />
     </div>
   );
 }

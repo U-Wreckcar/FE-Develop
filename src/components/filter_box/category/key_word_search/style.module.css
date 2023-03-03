@@ -1,0 +1,4 @@
+.search_item_box{
+    width: 150px;
+    border-bottom: 0.5px solid var(--color-white-400)
+}
