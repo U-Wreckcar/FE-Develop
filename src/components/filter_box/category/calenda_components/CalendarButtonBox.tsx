@@ -11,6 +11,7 @@ export const CalendarButtonBox = () => {
     dispatch(today(dataRef.current?.value));
   };
   const weekHandler = () => {
+    console.log(weekRef.current?.value);
     dispatch(today(weekRef.current?.value));
   };
   const monthHandler = () => {

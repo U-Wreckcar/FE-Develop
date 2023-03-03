@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { KeyWordInput } from './key_word_search/KeyWordInput';
-import { ModalInput } from './key_word_search/ModalInput';
+import { SelecteInput } from './key_word_search/SelecteInput';
+import styles from './categoryStyles.module.css';
 
 export const KeyWord = () => {
-  const [categoryValue, setCategoryValue] = useState('d');
-
-  useEffect(() => {
-    console.log(categoryValue);
-  }, [categoryValue]);
   return (
-    <div>
-      <div className="category_tilte category_layout">키워드 검색</div>
-      <ModalInput
-        categoryValue={categoryValue}
-        setCategoryValue={setCategoryValue}
-      />
-
-      <KeyWordInput />
+    <div className={styles.container}>
+      <div className="category_tilte">키워드 검색</div>
+      <div className={styles.container}>
+        <SelecteInput />
+        <KeyWordInput />
+      </div>
     </div>
   );
 };
