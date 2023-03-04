@@ -1,4 +1,4 @@
 import React from 'react';
 export const FButton = () => {
-  return <button>✔️</button>;
+  return <button>버튼</button>;
 };
