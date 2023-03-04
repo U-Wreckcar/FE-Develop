@@ -1,6 +1,5 @@
 const LoginBox = () => {
-  const kakaoUrl =
-    'https://developers.kakao.com/docs/latest/ko/kakaologin/js#login'
+  const kakaoUrl = 'https://5034-14-6-160-238.jp.ngrok.io/auth/kakao';
   const onClickKakaoBtn = () => {
     window.location.href = kakaoUrl;
   };
