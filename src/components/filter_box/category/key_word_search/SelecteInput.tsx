@@ -1,5 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import styles from './style.module.css';
+import React, { ChangeEvent } from 'react';
 
 export const SelecteInput = () => {
   const checkHandler = (e: ChangeEvent<HTMLSelectElement>) => {
