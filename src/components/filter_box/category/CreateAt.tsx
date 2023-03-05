@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { today } from 'redux/slice/filterSlice';
-import { useAppDispatch } from 'util/hooks/selectorDispatch';
+import { useAppDispatch } from 'util/reduxType/type';
 import { Calendar } from './calenda_components/Calendar';
 import { CalendarButtonBox } from './calenda_components/CalendarButtonBox';
 import styles from './categoryStyles.module.css';

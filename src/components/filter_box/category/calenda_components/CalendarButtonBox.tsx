@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useAppDispatch } from 'util/hooks/selectorDispatch';
+import { useAppDispatch } from 'util/reduxType/type';
 import { today } from 'redux/slice/filterSlice';
 import styles from './calendarStyles.module.css';
 export const CalendarButtonBox = () => {

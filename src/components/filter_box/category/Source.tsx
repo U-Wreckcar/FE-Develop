@@ -1,7 +1,7 @@
 import React from 'react';
-import { FButton } from 'components/filter_box/shared/FButton';
-import { FInput } from 'components/filter_box/shared/FInput';
-import { IButton } from 'components/filter_box/shared/IButton';
+import { FButton } from 'components/filter_box/elem/FButton';
+import { FInput } from 'components/filter_box/elem/FInput';
+import { IButton } from 'components/filter_box/elem/IButton';
 import styles from './categoryStyles.module.css';
 export const Source = () => {
   const mockKeyWord = [
