@@ -1,7 +1,7 @@
 import React from 'react';
-import { FButton } from '../shared/FButton';
-import { IButton } from '../shared/IButton';
-import { FInput } from '../shared/FInput';
+import { FButton } from '../elem/FButton';
+import { IButton } from '../elem/IButton';
+import { FInput } from '../elem/FInput';
 import styles from './categoryStyles.module.css';
 export const Medium = () => {
   const mockKeyWord = [

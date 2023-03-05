@@ -1,5 +1,5 @@
 import { FormEvent, useRef } from 'react';
-import { useAppSelector, useAppDispatch } from 'util/hooks/selectorDispatch';
+import { useAppSelector, useAppDispatch } from 'util/reduxType/type';
 import { today } from 'redux/slice/filterSlice';
 
 export const Calendar = () => {
