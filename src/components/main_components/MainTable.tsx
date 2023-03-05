@@ -7,161 +7,137 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-type Maintable = {
-  createTime: string;
-  url: string;
-  campaignID: string;
-  source: string;
-  medium: string;
-  campaignName: string | null;
-  campaignKeyWord: string | null;
-  campaignTerm: string | null;
-  memo: string | null;
-  utm: string;
-  shortUtm: string;
+type MainTable = {
+  created_at: string;
+  utm_url: string;
+  utm_campaign_id: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign_name: string | null;
+  utm_term: string | null;
+  utm_memo: string | null;
+  full_url: string;
+  shorten_url: string;
 };
 
-const defaultData: Maintable[] = [
+const defaultData: MainTable[] = [
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.coadfm',
-    campaignID: 'camapign IDadfaf',
-    source: 'sourcadfe',
-    medium: 'mediuadfadm',
-    campaignName: '2020_padferformance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgafaae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
   {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
-  },
-  {
-    createTime: '2023.02.22',
-    url: 'www.vava.com',
-    campaignID: 'camapign ID',
-    source: 'source',
-    medium: 'medium',
-    campaignName: '2020_performance.com',
-    campaignKeyWord: 'iphone12',
-    campaignTerm: 'imgae1',
-    memo: 'utm 수정이필요하다',
-    utm: 'https://shop.com.ke',
-    shortUtm: 'https://cococo.com',
+    created_at: '2023.02.22',
+    utm_url: 'www.vava.com',
+    utm_campaign_id: 'camapign ID',
+    utm_source: 'source',
+    utm_medium: 'medium',
+    utm_campaign_name: '2020_performance.com',
+    utm_term: 'imgae1',
+    utm_memo: 'utm 수정이필요하다',
+    full_url: 'https://shop.com.ke',
+    shorten_url: 'https://cococo.com',
   },
 ];
 
-const columnHelper = createColumnHelper<Maintable>();
+const columnHelper = createColumnHelper<MainTable>();
 
 const columns = [
-  columnHelper.accessor('createTime', {
+  columnHelper.accessor('created_at', {
     cell: (info) => info.getValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor((row) => row.url, {
-    id: 'url',
+  columnHelper.accessor((row) => row.utm_url, {
+    id: 'utm_url',
     cell: (info) => <i>{info.getValue()}</i>,
     header: () => <span>url</span>,
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('campaignID', {
-    header: () => 'campaignID',
+  columnHelper.accessor('utm_campaign_id', {
+    header: () => 'utm_campaign_id',
     cell: (info) => info.renderValue(),
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('source', {
+  columnHelper.accessor('utm_source', {
     header: () => <span>source</span>,
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('medium', {
+  columnHelper.accessor('utm_medium', {
     header: 'medium',
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('campaignName', {
+  columnHelper.accessor('utm_campaign_name', {
     header: 'campaignName',
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('campaignKeyWord', {
-    header: 'campaignKeyWord',
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor('campaignTerm', {
+  columnHelper.accessor('utm_term', {
     header: 'campaignTerm',
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('memo', {
+  columnHelper.accessor('utm_memo', {
     header: 'memo',
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('utm', {
+  columnHelper.accessor('full_url', {
     header: 'utm',
     footer: (info) => info.column.id,
   }),
-  columnHelper.accessor('shortUtm', {
+  columnHelper.accessor('shorten_url', {
     header: 'shortUtm',
     footer: (info) => info.column.id,
   }),
@@ -170,7 +146,7 @@ export const MainTable = () => {
   const [data, setData] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
-  const inputRef = useRef(null);
+  const [target, setTarget] = useState('');
 
   const table = useReactTable({
     data,
@@ -179,7 +155,8 @@ export const MainTable = () => {
   });
 
   const onClickMemo = (e: any) => {
-    console.log(e);
+    console.log(e.target.id);
+    setShow(true);
   };
   return (
     <div className="p-2">
@@ -204,20 +181,27 @@ export const MainTable = () => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell, i) => (
-                <td onClick={onClickMemo} key={cell.id}>
+                <td key={cell.id}>
                   {cell.column.id === 'memo' && !show && (
                     <input
-                      ref={inputRef}
-                      placeholder={`${cell.getValue()}`}
-                      onFocus={() => setShow(true)}
+                      id={cell.id}
+                      value={`${cell.getValue()}`}
+                      onFocus={(e) => {
+                        setTarget(e.target.id);
+                        setShow(true);
+                      }}
                     />
                   )}
-                  {cell.column.id === 'memo' && show && (
+                  {cell.column.id === 'memo' && show && target === cell.id && (
                     <textarea
-                      placeholder={`${cell.getValue()}`}
+                      value={`${cell.getValue()}`}
                       onBlur={() => setShow(false)}
                     />
                   )}
+                  {cell.column.id === 'memo' &&
+                    show &&
+                    target !== cell.id &&
+                    flexRender(cell.column.columnDef.cell, cell.getContext())}
                   {cell.column.id !== 'memo' &&
                     flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
