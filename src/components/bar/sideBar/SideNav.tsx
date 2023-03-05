@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './stsidenav.module.css';
+import styles from './styles.module.css';
 import { Link } from 'react-router-dom';
 export const SideNav = () => {
   return (
