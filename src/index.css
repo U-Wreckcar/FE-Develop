@@ -1,14 +1,13 @@
-:root{
+:root {
   /* Color */
-  --color-white-100: #ffffff; 
+  --color-white-100: #ffffff;
   --color-white-200: #f7f7f7;
-  --color-white-300: #DFDFDF;
-  --color-white-400:#CECECE;
-  --color-gray: #A5A5A5;
+  --color-white-300: #dfdfdf;
+  --color-white-400: #cecece;
+  --color-gray: #a5a5a5;
   --color-darkgray: #242424;
   --color-black: #000000;
-  
-  
+
   /* Font */
   --font-title-headline28: 28px;
   --font-title-subhaed20: 20px;
@@ -21,42 +20,38 @@
   --weight-bold: 700;
   --weight-semi-bold: 600;
   --weight-regular: 400;
-    
+
   /* Animation */
   --animation-duration: 370ms;
-  
-  
 }
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 body {
   margin: 0;
-  font-family:Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-h1{
+h1 {
   font-size: var(--font-title-headline28);
   font-weight: var(--weight-bold);
-
 }
-h2{
+h2 {
   font-size: var(--font-title-subhaed20);
   font-weight: var(--weight-bold);
 }
 
-p{
-  font-size: var(--font-ception);
-  font-weight: var(--weight-regular);
-}
-.category_tilte{
+h3 {
   font-size: var(--font-body);
   font-weight: var(--weight-bold);
+}
+h5 {
+  font-size: var(--font-ception);
+  font-weight: var(--weight-regular);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
