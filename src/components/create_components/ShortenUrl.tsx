@@ -46,12 +46,6 @@ const ShortenUrl = () => {
       <div>
         <button onClick={onClickCopyButton}>복사하기</button>
       </div>
-
-      {show && inputRef !== null ? (
-        <textarea value={data} onBlur={() => setShow(false)} />
-      ) : (
-        <input value={data} ref={inputRef} onFocus={() => setShow(true)} />
-      )}
     </div>
   );
 };
