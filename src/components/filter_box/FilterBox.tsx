@@ -3,7 +3,7 @@ import { CreateAt } from 'components/filter_box/category/CreateAt';
 import { Source } from 'components/filter_box/category/Source';
 import { Medium } from 'components/filter_box/category/Medium';
 import { KeyWord } from 'components/filter_box/category/KeyWord';
-import styles from './filterBox.module.css';
+import styles from './styles.module.css';
 export default function FilterBox() {
   const cadsf = [<CreateAt />, <Source />, <Medium />, <KeyWord />];
 
