@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
 export const useGetUtm = (get_UTM: any) => {

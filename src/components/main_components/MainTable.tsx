@@ -105,7 +105,6 @@ export const MainTable = () => {
     setShow(true);
   };
 
-  queryFunction();
   return (
     <div className="p-2">
       <table>
