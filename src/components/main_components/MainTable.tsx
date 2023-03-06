@@ -89,10 +89,11 @@ export const MainTable = () => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
 
-  const query = useQuery(['utm'], () => queryFunction());
-  console.log(query.data);
-  function queryFunction() {
-    instance.get('/data');
+  // const query = useQuery(['getUtm'], () => queryFunction());
+  // console.log(query.data);
+  async function queryFunction() {
+    const data = await instance.get('/getUtm');
+    console.log(data);
   }
 
   const table = useReactTable({
@@ -105,6 +106,8 @@ export const MainTable = () => {
     console.log(e.target.id);
     setShow(true);
   };
+
+  queryFunction();
   return (
     <div className="p-2">
       <table>
