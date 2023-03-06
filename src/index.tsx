@@ -15,8 +15,10 @@ const queryClient = new QueryClient();
 root.render(
   <>
     <Provider store={store}>
-      <RouterProvider router={router} />
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <App />
+      </QueryClientProvider>
     </Provider>
   </>
 );

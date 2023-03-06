@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
+import instance from 'util/async/axiosConfig';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useQuery } from '@tanstack/react-query';
 
 type MainTable = {
   created_at: string;
@@ -21,66 +22,6 @@ type MainTable = {
 };
 
 const defaultData: MainTable[] = [
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
   {
     created_at: '2023.02.22',
     utm_url: 'www.vava.com',
@@ -143,10 +84,16 @@ const columns = [
   }),
 ];
 export const MainTable = () => {
-  const [data, setData] = React.useState(() => [...defaultData]);
+  const [data, setDataList] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
+
+  const query = useQuery(['utm'], () => queryFunction());
+  console.log(query.data);
+  function queryFunction() {
+    instance.get('/data');
+  }
 
   const table = useReactTable({
     data,
