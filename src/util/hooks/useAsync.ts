@@ -4,7 +4,6 @@ import React from 'react';
 export const useGetUtm = (get_UTM: any) => {
   return useQuery(['utms'], async () => {
     const { data } = await get_UTM;
-    console.log(data);
     return data;
   });
 };
