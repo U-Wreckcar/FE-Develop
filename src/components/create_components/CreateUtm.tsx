@@ -12,6 +12,7 @@ export const CreateUtm = () => {
         <h5>문구입력부분? 어떤 데이터?</h5>
         <CreateCategory />
         <InputList />
+        <button>생성하기</button>
       </div>
     </div>
   );
