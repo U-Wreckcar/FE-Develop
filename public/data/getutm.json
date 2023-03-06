@@ -1,5 +1,5 @@
 {
-  "data": [
+  "getUtm": [
     {
       "created_at": "2023.02.22",
       "utm_url": "www.vava.com",
@@ -8,7 +8,7 @@
       "utm_medium": "medium",
       "utm_campaign_name": "2020_performance.com",
       "utm_term": "imgae1",
-      "utm_memo": "utm 수정이필요하다",
+      "utm_memo": "utm 필요하다",
       "full_url": "https://shop.com.ke",
       "shorten_url": "https://cococo.com"
     }
