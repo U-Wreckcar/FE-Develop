@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from 'styles.module.css';
-export const MemoInput = () => {
+type propsType = {
+  name: string;
+};
+export const MemoInput: React.FC<propsType> = ({ name }) => {
   return (
     <div>
-      <textarea></textarea>
+      <textarea placeholder={`${name}`}></textarea>
     </div>
   );
 };

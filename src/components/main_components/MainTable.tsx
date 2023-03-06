@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import instance from 'util/async/axiosConfig';
+import { get_UTM } from 'util/async/api';
+import { useGetUtm } from 'util/hooks/useAsync';
 import {
   createColumnHelper,
   flexRender,
@@ -89,12 +91,8 @@ export const MainTable = () => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
 
-  // const query = useQuery(['getUtm'], () => queryFunction());
-  // console.log(query.data);
-  async function queryFunction() {
-    const data = await instance.get('/getUtm');
-    console.log(data);
-  }
+  const getUTMRes = useGetUtm(get_UTM);
+  console.log(getUTMRes.data);
 
   const table = useReactTable({
     data,

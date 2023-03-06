@@ -22,13 +22,13 @@ export const CreateInput = () => {
           i === 'medium' ||
           i === 'campaign_name'
         ) {
-          return <RequirInput />;
+          return <RequirInput name={i} key={idx} />;
         } else if (i === 'memo') {
-          return <MemoInput />;
+          return <MemoInput name={i} key={idx} />;
         } else {
           return (
             <div key={idx}>
-              <input id={`${i}`} />
+              <input id={`${i}`} placeholder={i} />
             </div>
           );
         }
