@@ -15,11 +15,11 @@ type UTMItem = {
   full_url: string;
   shorten_url: string;
 };
-interface State {
+interface UTMState {
   utms: UTMItem[];
 }
 
-const initialState: State = {
+const initialState: UTMState = {
   utms: [
     {
       id: 1,
@@ -37,7 +37,7 @@ const initialState: State = {
   ],
 };
 
-export const UTMSlice = createSlice({
+export const utmSlice = createSlice({
   name: 'UTMItem',
   initialState,
   reducers: {
@@ -51,6 +51,6 @@ export const UTMSlice = createSlice({
   },
 });
 
-export const { addUTM, deleteUTM } = UTMSlice.actions;
+export const { addUTM, deleteUTM } = utmSlice.actions;
 export const utms = (state: RootState) => state.utms.utms;
-export default UTMSlice.reducer;
+export default utmSlice.reducer;
