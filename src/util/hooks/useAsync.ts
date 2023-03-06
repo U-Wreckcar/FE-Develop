@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-// import { get_utm } from 'async/api/getApi';
+import React from 'react';
 
-// export const useGetUtm = () => {
-//   return useQuery(['get_utm'], async () => {
-//     const { data } = await
-//     return data;
-//   });
-// };
+export const useGetUtm = (get_UTM: any) => {
+  return useQuery(['utms'], async () => {
+    const { data } = await get_UTM;
+    console.log(data);
+    return data;
+  });
+};

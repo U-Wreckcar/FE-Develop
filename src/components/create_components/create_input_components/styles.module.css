@@ -2,7 +2,6 @@
 
 .container_category {
   display: flex;
-  align-items: center;
 
   width: 1590px;
   height: 40px;
@@ -14,6 +13,8 @@
 }
 
 .itemBox {
+  display: flex;
+  align-items: center;
   width: 1000px;
   height: 40px;
 }
@@ -24,4 +25,8 @@
   text-align: center;
   width: 176px;
   height: 20px;
+}
+.container_create {
+  display: flex;
+  margin: 10px 0;
 }

@@ -1,6 +1,10 @@
 import React, { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
-export const RequirInput = () => {
+
+type propsType = {
+  name: string;
+};
+export const RequirInput: React.FC<propsType> = ({ name }) => {
   const {
     register,
     handleSubmit,
@@ -11,11 +15,15 @@ export const RequirInput = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input defaultValue="test" {...register('example')} />
-      <input {...register('exampleRequired', { required: true })} />
-      <input {...register('f', { required: true })} />
+      <input
+        placeholder={`${name}`}
+        // defaultValue=""
+        {...register('URL', { required: true })}
+      />
+
       {errors.exampleRequired && <span>This field is required</span>}
-      <input type="submit" />{' '}
+      <input type="submit" />
+      {''}
     </form>
   );
 };
