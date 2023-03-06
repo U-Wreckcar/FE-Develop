@@ -90,8 +90,10 @@ export const MainTable = () => {
   const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
+
   const getUTMRes = useGetUtm(get_UTM);
   console.log(getUTMRes.data);
+
   const table = useReactTable({
     data,
     columns,
@@ -102,6 +104,8 @@ export const MainTable = () => {
     console.log(e.target.id);
     setShow(true);
   };
+
+  queryFunction();
   return (
     <div className="p-2">
       <table>
