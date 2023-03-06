@@ -1,0 +1,27 @@
+/* Create Category */
+
+.container_category {
+  display: flex;
+  align-items: center;
+
+  width: 1590px;
+  height: 40px;
+
+  border-radius: 4px;
+
+  background-color: var(--color-white-200);
+  padding: 10px 54px 10px 58px;
+}
+
+.itemBox {
+  width: 1000px;
+  height: 40px;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 176px;
+  height: 20px;
+}

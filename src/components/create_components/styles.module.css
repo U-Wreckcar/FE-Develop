@@ -1,0 +1,16 @@
+/* Create Input */
+
+.container_create {
+  display: flex;
+  align-items: center;
+
+  width: 1590px;
+  height: 40px;
+
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.inputBox {
+  display: flex;
+}
