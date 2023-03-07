@@ -91,6 +91,8 @@ export const MainTable = () => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(get_UTM);
+  const { isError, isSuccess } = useGetUtm(get_UTM);
+  console.log(isError, isSuccess);
   console.log(getUTMRes.data);
   const table = useReactTable({
     data,
