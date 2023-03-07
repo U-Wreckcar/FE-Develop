@@ -7,6 +7,7 @@ import {
 import { columns, MainTableType } from './MainTableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
+import { CopyButton } from '../../shared/button/CopyButton';
 
 let defaultData: MainTableType[] | [] = [];
 
@@ -16,7 +17,6 @@ export type MainTableProps = {
 
 export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
-  const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
 
@@ -63,9 +63,11 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell, i) => (
                 <td onClick={onClickMemo} key={cell.id}>
-                  {cell.column.id === 'full_url' && <button>복사하기</button>}
+                  {cell.column.id === 'full_url' && (
+                    <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                  )}
                   {cell.column.id === 'shorten_url' && (
-                    <button>복사하기</button>
+                    <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
                   {cell.column.id === 'url' && <button>url 연결</button>}
                   {cell.column.id === 'utm_memo' && !show && (
@@ -119,9 +121,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         </tfoot>
       </table>
       <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
     </div>
   );
 };

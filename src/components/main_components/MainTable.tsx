@@ -13,7 +13,6 @@ let defaultData: MainTableType[] | [] = [];
 
 export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
-  const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(get_UTM);
@@ -107,9 +106,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         </tfoot>
       </table>
       <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
     </div>
   );
 };

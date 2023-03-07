@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './styles.module.css';
 
 type CopyButtonProps = {
-  style: string;
+  style?: string;
   text: string;
 };
 
@@ -19,8 +20,8 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ style, text }) => {
     }
   };
   return (
-    <button className={style} onClick={onClickCopyBtn}>
-      CopyButton
+    <button className={styles.button} onClick={onClickCopyBtn}>
+      복사하기
     </button>
   );
 };
