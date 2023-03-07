@@ -5,7 +5,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-export type MainTable = {
+export type MainTableType = {
   created_at: string;
   utm_url: string;
   utm_campaign_id: string;
@@ -18,22 +18,7 @@ export type MainTable = {
   shorten_url: string;
 };
 
-export const defaultData: MainTable[] = [
-  {
-    created_at: '2023.02.22',
-    utm_url: 'www.vava.com',
-    utm_campaign_id: 'camapign ID',
-    utm_source: 'source',
-    utm_medium: 'medium',
-    utm_campaign_name: '2020_performance.com',
-    utm_term: 'imgae1',
-    utm_memo: 'utm 수정이필요하다',
-    full_url: 'https://shop.com.ke',
-    shorten_url: 'https://cococo.com',
-  },
-];
-
-const columnHelper = createColumnHelper<MainTable>();
+const columnHelper = createColumnHelper<MainTableType>();
 
 export const columns = [
   columnHelper.accessor('created_at', {
@@ -78,3 +63,4 @@ export const columns = [
     footer: (info) => info.column.id,
   }),
 ];
+

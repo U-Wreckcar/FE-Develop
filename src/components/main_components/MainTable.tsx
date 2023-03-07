@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   flexRender,
   getCoreRowModel,
@@ -6,8 +6,10 @@ import {
 } from '@tanstack/react-table';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
-import { defaultData, columns } from './MainTableData';
+import { columns, MainTableType } from './MainTableData';
 import { MainTableProps } from './MainBtnTable';
+
+let defaultData: MainTableType[] | [] = [];
 
 export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
@@ -15,7 +17,10 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(get_UTM);
-  console.log(getUTMRes.data);
+
+  useEffect(() => {
+    setDataList(getUTMRes.data);
+  }, [getUTMRes.data]);
 
   const table = useReactTable({
     data,
