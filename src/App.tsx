@@ -1,7 +1,5 @@
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
 function App() {
-  return <>{/* <ReactQueryDevtools initialIsOpen={false} /> */}</>;
+  return <></>;
 }
 
 export default App;

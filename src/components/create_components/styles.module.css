@@ -1,5 +1,7 @@
 /* Create Input */
-
+.input {
+  border: none;
+}
 .container_create {
   display: flex;
   align-items: center;

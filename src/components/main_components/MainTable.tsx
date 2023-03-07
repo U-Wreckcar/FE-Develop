@@ -17,9 +17,11 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(get_UTM);
 
+
   useEffect(() => {
     setDataList(getUTMRes.data);
   }, [getUTMRes.data]);
+
 
   const table = useReactTable({
     data,
