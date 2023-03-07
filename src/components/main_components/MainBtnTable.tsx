@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import {
   flexRender,
   getCoreRowModel,
@@ -7,9 +7,12 @@ import {
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
 import { defaultData, columns } from './MainTableData';
-import { MainTableProps } from './MainBtnTable';
 
-export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
+export type MainTableProps = {
+  setSummary: Dispatch<SetStateAction<boolean>>;
+};
+
+export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
@@ -31,7 +34,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
 
   return (
     <div className="p-2">
-      <button onClick={() => setSummary(false)}>데이터 요약보기</button>
+      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -53,7 +56,12 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell, i) => (
-                <td key={cell.id}>
+                <td onClick={onClickMemo} key={cell.id}>
+                  {cell.column.id === 'full_url' && <button>복사하기</button>}
+                  {cell.column.id === 'shorten_url' && (
+                    <button>복사하기</button>
+                  )}
+                  {cell.column.id === 'url' && <button>url 연결</button>}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input
                       id={cell.id}
@@ -78,6 +86,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                     target !== cell.id &&
                     flexRender(cell.column.columnDef.cell, cell.getContext())}
                   {cell.column.id !== 'utm_memo' &&
+                    cell.column.id !== 'url' &&
+                    cell.column.id !== 'full_url' &&
+                    cell.column.id !== 'shorten_url' &&
                     flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
