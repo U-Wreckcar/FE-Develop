@@ -8,7 +8,7 @@ import { columns, MainTableType } from './MainTableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
 import { CopyButton } from '../../shared/button/CopyButton';
-import Modal from 'react-modal';
+import Tooltip from '@mui/material/Tooltip';
 
 let defaultData: MainTableType[] | [] = [];
 
@@ -16,18 +16,6 @@ export type MainTableProps = {
   setSummary: Dispatch<SetStateAction<boolean>>;
 };
 
-const customModal = {
-  content: {
-    width: '100px',
-    height: '40px',
-    background: '#eee',
-    // top: '50%',
-    // left: '50%',
-    // transform: 'translate(-50%,-50%)',
-  },
-};
-
-Modal.setAppElement('#root');
 export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
   const [show, setShow] = useState(false);
@@ -82,26 +70,13 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
                   {cell.column.id === 'url' && !modal && (
-                    <a href={`${cell.getValue()}`} title={`${cell.getValue()}`}>
-                      <button onMouseOver={() => setModal(true)}>
-                        url 연결
-                      </button>
-                    </a>
-
-                    // <Modal
-                    //   isOpen={modal}
-                    //   style={customModal}
-                    //   onRequestClose={() => setModal(false)}
-                    // >
-                    //   <p onClick={() => moveUrl(`${cell.getValue()}`)}>
-                    //     {flexRender(
-                    //       cell.column.columnDef.cell,
-                    //       cell.getContext()
-                    //     )}
-                    //   </p>
-                    // </Modal>
+                    <Tooltip title={`${cell.getValue()}`}>
+                      <a href={`${cell.getValue()}`}>
+                        <button>url 연결</button>
+                      </a>
+                    </Tooltip>
                   )}
-                  {cell.column.id === 'url' && modal && (
+                  {/* {cell.column.id === 'url' && modal && (
                     <div
                       onMouseLeave={() => setModal(false)}
                       onClick={() => moveUrl(`${cell.getValue()}`)}
@@ -111,7 +86,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         cell.getContext()
                       )}
                     </div>
-                  )}
+                  )} */}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input
                       id={cell.id}
