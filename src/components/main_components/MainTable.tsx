@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import instance from 'util/async/axiosConfig';
+import { getUTM } from 'util/async/api';
+import { useGetUtm } from 'util/hooks/useAsync';
+
 import {
   flexRender,
   getCoreRowModel,
@@ -15,7 +19,11 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
-  const getUTMRes = useGetUtm(get_UTM);
+
+  const getUTMRes = useGetUtm(getUTM);
+
+  console.log(getUTMRes.data);
+
 
 
   useEffect(() => {
