@@ -1,112 +1,213 @@
-import React, { useEffect, useState } from 'react';
+import React, { HTMLProps, useMemo, useEffect } from 'react';
+import { MainTableType } from './TableData';
+import { useGetUtm } from 'util/hooks/useAsync';
+import { get_UTM } from 'util/async/api';
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useGetUtm } from 'util/hooks/useAsync';
-import { get_UTM } from 'util/async/api';
-import { columns, MainTableType } from './MainTableData';
-import { MainTableProps } from './MainBtnTable';
 
-let defaultData: MainTableType[] | [] = [];
-
-export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
-  const [data, setDataList] = React.useState(() => [...defaultData]);
-  const [show, setShow] = useState(false);
-  const [target, setTarget] = useState('');
+export function MainTable() {
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [data, setData] = React.useState<Array<MainTableType>>([]);
   const getUTMRes = useGetUtm(get_UTM);
 
   useEffect(() => {
-    setDataList(getUTMRes.data);
-  }, [getUTMRes.data]);
+    setData(getUTMRes.data);
+  }, [getUTMRes]);
+
+  const columns = useMemo<ColumnDef<MainTableType>[]>(
+    () => [
+      {
+        id: 'select',
+        header: ({ table }) => (
+          <IndeterminateCheckbox
+            {...{
+              checked: table.getIsAllRowsSelected(),
+              indeterminate: table.getIsSomeRowsSelected(),
+              onChange: table.getToggleAllRowsSelectedHandler(),
+            }}
+          />
+        ),
+        cell: ({ row }) => (
+          <div className="px-1">
+            <IndeterminateCheckbox
+              {...{
+                checked: row.getIsSelected(),
+                disabled: !row.getCanSelect(),
+                indeterminate: row.getIsSomeSelected(),
+                onChange: row.getToggleSelectedHandler(),
+              }}
+            />
+          </div>
+        ),
+      },
+      {
+        header: '생성일자',
+        id: 'created_at',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: 'URL',
+        id: 'utm_url',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '캠페인 ID',
+        id: 'utm_campaign_id',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '소스',
+        id: 'utm_source',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '미디움',
+        id: 'utm_medium',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '캠페인 이름',
+        id: 'utm_campaign_name',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '캠페인 텀',
+        id: 'utm_term',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '캠페인 콘텐츠',
+        id: 'utm_campaign_content',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: '메모',
+        id: 'utm_memo',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: 'UTM',
+        id: 'full_url',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+      {
+        header: 'Shorten URL',
+        id: 'shorten_url',
+        cell: (info) => info.getValue(),
+        footer: (props) => props.column.id,
+      },
+    ],
+    []
+  );
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      rowSelection,
+    },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
+    //getFilteredRowModel: getFilteredRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
+    debugTable: true,
   });
-
-  const onClickMemo = (e: any) => {
-    console.log(e.target.id);
-    console.log(e);
-    setShow(true);
-  };
-
+  console.log(table.getRowModel().rows);
   return (
     <div className="p-2">
-      <button>추출하기</button> <button>삭제하기</button>
-      <button onClick={() => setSummary(false)}>데이터 요약보기</button>
+      <div className="h-2" />
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell, i) => (
-                <td key={cell.id}>
-                  {cell.column.id === 'utm_memo' && !show && (
-                    <input
-                      id={cell.id}
-                      style={{ border: 'none' }}
-                      value={`${cell.getValue()}`}
-                      onFocus={(e) => {
-                        setTarget(e.target.id);
-                        setShow(true);
-                      }}
-                    />
-                  )}
-                  {cell.column.id === 'utm_memo' &&
-                    show &&
-                    target === cell.id && (
-                      <textarea
-                        value={`${cell.getValue()}`}
-                        onBlur={() => setShow(false)}
-                      />
-                    )}
-                  {cell.column.id === 'utm_memo' &&
-                    show &&
-                    target !== cell.id &&
-                    flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  {cell.column.id !== 'utm_memo' &&
-                    flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
+          <tr>
+            <td className="p-1">
+              <IndeterminateCheckbox
+                {...{
+                  checked: table.getIsAllPageRowsSelected(),
+                  indeterminate: table.getIsSomePageRowsSelected(),
+                  onChange: table.getToggleAllPageRowsSelectedHandler(),
+                }}
+              />
+            </td>
+          </tr>
         </tfoot>
       </table>
-      <div className="h-4" />
     </div>
   );
-};
+}
+
+function IndeterminateCheckbox({
+  indeterminate,
+  className = '',
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = React.useRef<HTMLInputElement>(null!);
+
+  React.useEffect(() => {
+    if (typeof indeterminate === 'boolean') {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+  }, [ref, indeterminate]);
+
+  return (
+    <input
+      type="checkbox"
+      ref={ref}
+      className={className + ' cursor-pointer'}
+      {...rest}
+    />
+  );
+}
