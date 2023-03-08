@@ -1,18 +1,69 @@
 /* Create Input */
-.input {
+input {
+  width: 178px;
+  height: 40px;
   border: none;
+  margin: 0 4px;
+  border-radius: 4px;
 }
-.container_create {
+
+.itemBox {
+  /* position: static; */
   display: flex;
   align-items: center;
-
+  background-color: var(--color-gray);
   width: 1590px;
-  height: 40px;
-
-  border-radius: 4px;
+  height: 60px;
   margin: 8px 0;
+  border-radius: 4px;
+}
+.active {
+  border: none;
+  resize: none;
+  width: 178px;
+  height: 40px;
+  margin: 0 4px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.active:focus {
+  /* position: absolute; */
+  border: 0.5px solid black;
+  width: 178px;
+  height: 150px;
+  outline: none;
 }
 
-.inputBox {
+.number {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 13px 0 17px;
+}
+.removeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 17px 0 13px;
+}
+.buttonBox {
+  width: 1590px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+}
+.addListBtn {
+  width: 35px;
+  height: 35px;
+
+  border: none;
+  cursor: pointer;
+}
+.createBtn {
+  width: 80px;
+  height: 35px;
 }

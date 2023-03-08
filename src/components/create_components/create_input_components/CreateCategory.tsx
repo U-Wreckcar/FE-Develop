@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.css';
 export const CreateCategory = () => {
   const category = [
@@ -7,8 +6,8 @@ export const CreateCategory = () => {
     '소스 선택/입력 *',
     '미디움 선택/입력 * ',
     '캠페인 이름 입력 *',
-    '캠페인 키워드 입력',
-    'campaign_term',
+    '캠페인 텀 입력',
+    '캠페인 콘텐츠 입력',
     '메모 입력',
   ];
 
