@@ -1,4 +1,5 @@
 import axios from './axiosConfig';
+import instance from "./axiosConfig";
 
 /**
  *
@@ -61,3 +62,4 @@ export const ExternalUTM = async (data: string) => {
 export const deleteUTM = async (utmId: any) => {
   await axios.delete(`utms/delete/${utmId}`);
 };
+
