@@ -16,10 +16,23 @@ export type MainTableProps = {
   setSummary: Dispatch<SetStateAction<boolean>>;
 };
 
+const customModal = {
+  content: {
+    width: '100px',
+    height: '40px',
+    background: '#eee',
+    // top: '50%',
+    // left: '50%',
+    // transform: 'translate(-50%,-50%)',
+  },
+};
+
+Modal.setAppElement('#root');
 export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [data, setDataList] = React.useState(() => [...defaultData]);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
+  const [modal, setModal] = useState(false);
 
   const getUTMRes = useGetUtm(get_UTM);
 
@@ -71,9 +84,23 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
                   {cell.column.id === 'url' && (
-                    // <ModalHover onHover={<p>{`${cell.getValue()}`}</p>}>
-                    <button>url 연결</button>
-                    //</ModalHover>
+                    <>
+                      <button onMouseEnter={() => setModal(true)}>
+                        url 연결
+                      </button>
+                      <Modal
+                        isOpen={modal}
+                        style={customModal}
+                        onRequestClose={() => setModal(false)}
+                      >
+                        <p>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </p>
+                      </Modal>
+                    </>
                   )}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input
