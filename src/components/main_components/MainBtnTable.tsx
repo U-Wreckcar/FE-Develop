@@ -8,6 +8,7 @@ import { columns, MainTableType } from './MainTableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
 import { CopyButton } from '../../shared/button/CopyButton';
+import { ModalHover } from 'react-modal-hover';
 
 let defaultData: MainTableType[] | [] = [];
 
@@ -40,7 +41,9 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
 
   return (
     <div className="p-2">
-      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
+      <ModalHover onHover={<p>hover!</p>}>
+        <button onClick={() => setSummary(true)}>데이터 상세보기</button>
+      </ModalHover>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -69,7 +72,11 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                   {cell.column.id === 'shorten_url' && (
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
-                  {cell.column.id === 'url' && <button>url 연결</button>}
+                  {cell.column.id === 'url' && (
+                    // <ModalHover onHover={<p>{`${cell.getValue()}`}</p>}>
+                    <button>url 연결</button>
+                    //</ModalHover>
+                  )}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input
                       id={cell.id}
