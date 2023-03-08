@@ -38,7 +38,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
 
   useEffect(() => {
     setDataList(getUTMRes.data);
-  }, [getUTMRes.data]);
+  }, [getUTMRes.data, modal]);
 
   const table = useReactTable({
     data,
@@ -51,6 +51,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   };
   return (
     <div className="p-2">
+      <button>추출하기</button> <button>삭제하기</button>
       <button onClick={() => setSummary(true)}>데이터 상세보기</button>
       <table>
         <thead>
@@ -72,7 +73,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
-              {row.getVisibleCells().map((cell, i) => (
+              {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {cell.column.id === 'full_url' && (
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
@@ -80,27 +81,36 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                   {cell.column.id === 'shorten_url' && (
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
-                  {cell.column.id === 'url' && (
-                    <>
-                      <button
-                        onMouseOver={() => setModal(true)}
-                        // onMouseLeave={() => setModal(false)}
-                      >
+                  {cell.column.id === 'url' && !modal && (
+                    <a href={`${cell.getValue()}`} title={`${cell.getValue()}`}>
+                      <button onMouseOver={() => setModal(true)}>
                         url 연결
                       </button>
-                      <Modal
-                        isOpen={modal}
-                        style={customModal}
-                        onRequestClose={() => setModal(false)}
-                      >
-                        <p onClick={() => moveUrl(`${cell.getValue()}`)}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </p>
-                      </Modal>
-                    </>
+                    </a>
+
+                    // <Modal
+                    //   isOpen={modal}
+                    //   style={customModal}
+                    //   onRequestClose={() => setModal(false)}
+                    // >
+                    //   <p onClick={() => moveUrl(`${cell.getValue()}`)}>
+                    //     {flexRender(
+                    //       cell.column.columnDef.cell,
+                    //       cell.getContext()
+                    //     )}
+                    //   </p>
+                    // </Modal>
+                  )}
+                  {cell.column.id === 'url' && modal && (
+                    <div
+                      onMouseLeave={() => setModal(false)}
+                      onClick={() => moveUrl(`${cell.getValue()}`)}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </div>
                   )}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input

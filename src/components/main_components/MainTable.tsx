@@ -17,11 +17,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(get_UTM);
 
-
   useEffect(() => {
     setDataList(getUTMRes.data);
   }, [getUTMRes.data]);
-
 
   const table = useReactTable({
     data,
@@ -37,6 +35,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
 
   return (
     <div className="p-2">
+      <button>추출하기</button> <button>삭제하기</button>
       <button onClick={() => setSummary(false)}>데이터 요약보기</button>
       <table>
         <thead>
