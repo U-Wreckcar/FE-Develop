@@ -8003,6 +8003,11 @@ react-is@^18.0.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-modal-hover@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/react-modal-hover/-/react-modal-hover-1.1.13.tgz#784c6cc2f0adfbf217da4c5c09676baa81ae3c21"
+  integrity sha512-WmpCIL3xg52rOS+gEnp2M7BZwRiI1IPKg9aPKmnbFJnYliWge9qPPO+RIVmk1tOQYi7YGWXFulWWck99384U0Q==
+
 react-redux@^8.0.5:
   version "8.0.5"
   resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.0.5.tgz"
