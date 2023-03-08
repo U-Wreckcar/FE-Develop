@@ -71,22 +71,11 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                   )}
                   {cell.column.id === 'url' && !modal && (
                     <Tooltip title={`${cell.getValue()}`}>
-                      <a href={`${cell.getValue()}`}>
-                        <button>url 연결</button>
-                      </a>
+                      <button onClick={() => moveUrl(`${cell.getValue()}`)}>
+                        url 연결
+                      </button>
                     </Tooltip>
                   )}
-                  {/* {cell.column.id === 'url' && modal && (
-                    <div
-                      onMouseLeave={() => setModal(false)}
-                      onClick={() => moveUrl(`${cell.getValue()}`)}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </div>
-                  )} */}
                   {cell.column.id === 'utm_memo' && !show && (
                     <input
                       id={cell.id}
