@@ -8,7 +8,7 @@ import { columns, MainTableType } from './MainTableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { get_UTM } from 'util/async/api';
 import { CopyButton } from '../../shared/button/CopyButton';
-import { ModalHover } from 'react-modal-hover';
+import Modal from 'react-modal';
 
 let defaultData: MainTableType[] | [] = [];
 
@@ -41,9 +41,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
 
   return (
     <div className="p-2">
-      <ModalHover onHover={<p>hover!</p>}>
-        <button onClick={() => setSummary(true)}>데이터 상세보기</button>
-      </ModalHover>
+      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
