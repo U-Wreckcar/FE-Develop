@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import instance from 'util/async/axiosConfig';
-import { get_UTM } from 'util/async/api';
+import { getUTM } from 'util/async/api';
 import { useGetUtm } from 'util/hooks/useAsync';
 import {
   createColumnHelper,
@@ -90,9 +90,8 @@ export const MainTable = () => {
   const rerender = React.useReducer(() => ({}), {})[1];
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
-  const getUTMRes = useGetUtm(get_UTM);
-  const { isError, isSuccess } = useGetUtm(get_UTM);
-  console.log(isError, isSuccess);
+  const getUTMRes = useGetUtm(getUTM);
+
   console.log(getUTMRes.data);
   const table = useReactTable({
     data,
