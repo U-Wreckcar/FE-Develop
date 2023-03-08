@@ -46,12 +46,9 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const onClickMemo = (e: any) => {
-    console.log(e.target.id);
-    console.log(e);
-    setShow(true);
+  const moveUrl = (url: string) => {
+    window.open(url, '_blank');
   };
-
   return (
     <div className="p-2">
       <button onClick={() => setSummary(true)}>데이터 상세보기</button>
@@ -76,7 +73,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell, i) => (
-                <td onClick={onClickMemo} key={cell.id}>
+                <td key={cell.id}>
                   {cell.column.id === 'full_url' && (
                     <CopyButton text={`${cell.getValue()}`}></CopyButton>
                   )}
@@ -85,7 +82,10 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                   )}
                   {cell.column.id === 'url' && (
                     <>
-                      <button onMouseEnter={() => setModal(true)}>
+                      <button
+                        onMouseOver={() => setModal(true)}
+                        // onMouseLeave={() => setModal(false)}
+                      >
                         url 연결
                       </button>
                       <Modal
@@ -93,7 +93,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         style={customModal}
                         onRequestClose={() => setModal(false)}
                       >
-                        <p>
+                        <p onClick={() => moveUrl(`${cell.getValue()}`)}>
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
