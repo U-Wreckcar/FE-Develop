@@ -1,4 +1,5 @@
 
+
 import React, { HTMLProps, useMemo, useEffect } from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
@@ -9,6 +10,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+
 
 export function MainTable() {
   const [rowSelection, setRowSelection] = React.useState({});
