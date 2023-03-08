@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { postUTM } from 'util/async/api';
 import styles from './styles.module.css';
 export const InputItem = () => {
   const {
@@ -8,7 +10,10 @@ export const InputItem = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    console.log(JSON.stringify(data));
+    postUTM(JSON.stringify({ id: 5, url: data.url }));
+
     return console.log(data);
   };
   const requeirFn = (e: any) => {
@@ -33,6 +38,7 @@ export const InputItem = () => {
         className={styles.input}
         type="text"
         placeholder="campaign_id"
+        onInput={requeirFn}
         {...register('campaign_id', {
           maxLength: 70,
           pattern: /[a-z]/i,
@@ -52,6 +58,7 @@ export const InputItem = () => {
         className={styles.input}
         type="text"
         placeholder="medium"
+        onInput={requeirFn}
         {...register('medium', {
           required: true,
           maxLength: 70,
@@ -62,6 +69,7 @@ export const InputItem = () => {
         className={styles.input}
         type="text"
         placeholder="campaign_name"
+        onInput={requeirFn}
         {...register('campaign_name', {
           required: true,
           maxLength: 70,
@@ -72,6 +80,7 @@ export const InputItem = () => {
         className={styles.input}
         type="text"
         placeholder="campaign_keyword"
+        onInput={requeirFn}
         {...register('campaign_keyword', {
           maxLength: 70,
           pattern: /[a-z]/i,
@@ -81,6 +90,7 @@ export const InputItem = () => {
         className={styles.input}
         type="text"
         placeholder="campaign_term"
+        onInput={requeirFn}
         {...register('campaign_term', {
           maxLength: 70,
           pattern: /[a-z]/i,

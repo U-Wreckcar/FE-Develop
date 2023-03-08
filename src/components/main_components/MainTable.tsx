@@ -1,3 +1,4 @@
+
 import React, { HTMLProps, useMemo, useEffect } from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
@@ -13,6 +14,7 @@ export function MainTable() {
   const [rowSelection, setRowSelection] = React.useState({});
   const [data, setData] = React.useState<Array<MainTableType>>([]);
   const getUTMRes = useGetUtm(get_UTM);
+
 
   useEffect(() => {
     setData(getUTMRes.data);
