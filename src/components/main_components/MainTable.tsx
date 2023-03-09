@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import instance from 'util/async/axiosConfig';
-import { getUTMs } from 'util/async/api';
-=======
-
 import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
-
 import { MainTableType } from './TableData';
->>>>>>> origin/develop
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
 import { MainTableProps } from './MainBtnTable';
@@ -18,7 +10,7 @@ import {
   useReactTable,
   ColumnResizeMode,
 } from '@tanstack/react-table';
-import './mainStyle.css';
+import styles from './styles.module.css';
 
 export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [rowSelection, setRowSelection] = useState({});
@@ -26,11 +18,8 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(getUTMs);
-<<<<<<< HEAD
-=======
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>('onChange');
-
 
   useEffect(() => {
     setData(getUTMRes.data);
@@ -46,19 +35,17 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
               onChange: table.getToggleAllRowsSelectedHandler(),
-              size: 50,
             }}
           />
         ),
         cell: ({ row }) => (
-          <div className="px-1">
+          <div className={styles.input_box}>
             <IndeterminateCheckbox
               {...{
                 checked: row.getIsSelected(),
                 disabled: !row.getCanSelect(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
-                size: 50,
               }}
             />
           </div>
@@ -155,7 +142,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     ],
     []
   );
->>>>>>> origin/develop
 
   const table = useReactTable({
     data,
@@ -199,7 +185,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         <option value="onChange">Resize: "onChange"</option>
       </select>
       <div className="h-4" />
-      <div className="text-xl">{'<table/>'}</div>
       <div className="overflow-x-auto"></div>
       <table
         {...{

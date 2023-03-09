@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { AddUtmModal } from './AddUtmModal';
 import { setSideProps } from './PlusSideNav';
 
-export const SlimSideNav: React.FC<setSideProps> = ({ setSide }) => {
+export const SlimSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
   const [modal, setModal] = useState(false);
 
   const customStyles = {
@@ -25,35 +25,36 @@ export const SlimSideNav: React.FC<setSideProps> = ({ setSide }) => {
     setModal(false);
   };
   return (
-    <div>
+    <div className={styles.slim_container}>
       <div>
-        <img></img>
-        <button onClick={() => setSide(true)}>→</button>
+        <div>
+          <img></img>
+          <button onClick={() => setSide(true)}>→</button>
+        </div>
+        <div className={styles.title}></div>
+        {/* <Link to="/">HOME</Link> */}
+        {/* <Link to="/main">utm 관리</Link> */}
+        <div>
+          <Link to="/createutm">[+]</Link>
+        </div>
+        {/* <Link to="/userinfo">유저정보</Link> */}
+        <div>
+          <p onClick={() => setModal(!modal)}>+</p>
+          <AddUtmModal
+            isOpen={modal}
+            onRequestClose={closeModal}
+            style={customStyles}
+          />
+        </div>
+        <div>
+          <Link to="/main">[]</Link>
+        </div>
       </div>
-      <div className={styles.title}></div>
-      {/* <Link to="/">HOME</Link> */}
-      {/* <Link to="/main">utm 관리</Link> */}
       <div>
-        <Link to="/createutm">[+]</Link>
-      </div>
-      {/* <Link to="/userinfo">유저정보</Link> */}
-      <div>
-        <p onClick={() => setModal(!modal)}>+</p>
-        <AddUtmModal
-          isOpen={modal}
-          onRequestClose={closeModal}
-          style={customStyles}
-        />
-      </div>
-      <div>
-        <Link to="/main">[]</Link>
-      </div>
-      <div>
-        <h4>유렉카</h4>
         <ul>
-          <li>공지사항</li>
-          <li>가이드</li>
-          <li>문의하기</li>
+          <li>!</li>
+          <li>?</li>
+          <li>??</li>
         </ul>
       </div>
     </div>

@@ -19,7 +19,7 @@ import {
   useReactTable,
   ColumnResizeMode,
 } from '@tanstack/react-table';
-import './mainStyle.css';
+import styles from './styles.module.css';
 
 export type MainTableProps = {
   setSummary: Dispatch<SetStateAction<boolean>>;
@@ -47,32 +47,22 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
               onChange: table.getToggleAllRowsSelectedHandler(),
-              size: 50,
             }}
           />
         ),
         cell: ({ row }) => (
-          <div className="px-1">
+          <div className={styles.input_box}>
             <IndeterminateCheckbox
               {...{
                 checked: row.getIsSelected(),
                 disabled: !row.getCanSelect(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
-                size: 50,
               }}
             />
           </div>
         ),
       },
-      // {
-      //   header: '생성일자',
-      //   id: 'created_at-80',
-      //   accessorKey: 'created_at',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 80,
-      // },
       {
         header: 'URL',
         id: 'utm_url',
@@ -81,14 +71,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         footer: (props) => props.column.id,
         size: 130,
       },
-      // {
-      //   header: '캠페인 ID',
-      //   id: 'utm_campaign_id',
-      //   accessorKey: 'utm_campaign_id',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 130,
-      // },
       {
         header: '소스',
         id: 'utm_source',
@@ -113,22 +95,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         footer: (props) => props.column.id,
         size: 230,
       },
-      // {
-      //   header: '캠페인 텀',
-      //   id: 'utm_term',
-      //   accessorKey: 'utm_term',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 80,
-      // },
-      // {
-      //   header: '캠페인 콘텐츠',
-      //   id: 'utm_content',
-      //   accessorKey: 'utm_content',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 90,
-      // },
       {
         header: '메모',
         id: 'utm_memo',
@@ -203,16 +169,16 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         <option value="onChange">리사이즈: "onChange"</option>
       </select>
       <div className="h-4" />
-      <div className="text-xl">{'<table/>'}</div>
       <div className="overflow-x-auto"></div>
       <table
+        className={styles.table}
         {...{
           style: {
             width: table.getCenterTotalSize(),
           },
         }}
       >
-        <thead>
+        <thead className={styles.th}>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -266,6 +232,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td
+                      className={styles.td}
                       {...{
                         key: cell.id,
                         style: {
