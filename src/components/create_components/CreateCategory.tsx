@@ -1,4 +1,8 @@
-import styles from './styles.module.css';
+/**
+ * Syles
+ */
+import styles from './stylestest.module.css';
+// import styles from './styles.module.css';
 export const CreateCategory = () => {
   const category = [
     'URL 입력 *',
@@ -15,7 +19,7 @@ export const CreateCategory = () => {
     <div className={styles.container_category}>
       {category.map((i, idx) => {
         return (
-          <div key={idx} className={styles.itemBox}>
+          <div key={idx} className={styles.itemBoxs}>
             <h3 className={styles.item}>{i}</h3>
           </div>
         );

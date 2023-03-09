@@ -1,5 +1,6 @@
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
+import styles from './stylestest.module.css';
 import { utms } from 'redux/slice/utmSlice';
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
@@ -81,11 +82,11 @@ export const CreateUtm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={styles.container}>
           {fields.map((field, index) => {
             return (
               <div key={field.id}>
-                <section className={'section'} key={field.id}>
+                <section key={field.id}>
                   <div className={styles.itemBox}>
                     <div className={styles.number}>
                       {(index === 0 && 1) ||
@@ -162,7 +163,6 @@ export const CreateUtm = () => {
                     <textarea
                       className={styles.active}
                       {...register(`utms.${index}.utm_memo` as const, {
-                        required: true,
                         maxLength: 80,
                       })}
                     />

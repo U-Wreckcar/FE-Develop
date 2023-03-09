@@ -1,7 +1,8 @@
 import React from 'react';
 import { MemoInput } from './MemoInput';
 import { RequirInput } from './RequirInput';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
+import styles from './stylestest.module.css';
 export const CreateInput = () => {
   const inputArray = [
     'url',

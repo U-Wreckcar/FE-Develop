@@ -1,8 +1,9 @@
 import React from 'react';
-import { CreateUtm } from 'components/create_components/CreateUtm';
 import { getUTMs } from 'util/async/api';
 import { useGetUtm } from 'util/hooks/useAsync';
-import { CreateCategory } from 'components/create_components/create_input_components/CreateCategory';
+import { CreateUtm } from 'components/create_components/CreateUTM';
+import { CreateCategory } from 'components/create_components/CreateCategory';
+import { CreateCopyBox } from 'components/create_components/CreateCopyBox';
 export default function CreatePage() {
   const res = useGetUtm(getUTMs);
   console.log(res);
@@ -10,6 +11,7 @@ export default function CreatePage() {
     <>
       <CreateCategory />
       <CreateUtm />
+      <CreateCopyBox />
     </>
   );
 }
