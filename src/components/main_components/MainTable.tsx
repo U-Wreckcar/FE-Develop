@@ -1,4 +1,6 @@
+
 import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
+
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
@@ -20,6 +22,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const getUTMRes = useGetUtm(getUTMs);
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>('onChange');
+
 
   useEffect(() => {
     setData(getUTMRes.data);
