@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import instance from 'util/async/axiosConfig';
-import { getUTMs } from 'util/async/api';
-=======
-
 import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
 
 import { MainTableType } from './TableData';
->>>>>>> origin/develop
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
 import { MainTableProps } from './MainBtnTable';
@@ -26,11 +19,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState('');
   const getUTMRes = useGetUtm(getUTMs);
-<<<<<<< HEAD
-=======
+
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>('onChange');
-
 
   useEffect(() => {
     setData(getUTMRes.data);
@@ -155,7 +146,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     ],
     []
   );
->>>>>>> origin/develop
 
   const table = useReactTable({
     data,
