@@ -1,10 +1,17 @@
-
-import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
-
+import React, {
+  Dispatch,
+  SetStateAction,
+  HTMLProps,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
-import { MainTableProps } from './MainBtnTable';
+import { CopyButton } from '../../shared/button/CopyButton';
+import Tooltip from '@mui/material/Tooltip';
 import {
   ColumnDef,
   flexRender,
@@ -14,7 +21,10 @@ import {
 } from '@tanstack/react-table';
 import './mainStyle.css';
 
-export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
+export type MainTableProps = {
+  setSummary: Dispatch<SetStateAction<boolean>>;
+};
+export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [rowSelection, setRowSelection] = useState({});
   const [data, setData] = useState<Array<MainTableType>>([]);
   const [show, setShow] = useState(false);
@@ -22,7 +32,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const getUTMRes = useGetUtm(getUTMs);
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>('onChange');
-
 
   useEffect(() => {
     setData(getUTMRes.data);
@@ -56,14 +65,14 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
           </div>
         ),
       },
-      {
-        header: '생성일자',
-        id: 'created_at',
-        accessorKey: 'created_at',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-        size: 80,
-      },
+      // {
+      //   header: '생성일자',
+      //   id: 'created_at-80',
+      //   accessorKey: 'created_at',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 80,
+      // },
       {
         header: 'URL',
         id: 'utm_url',
@@ -72,14 +81,14 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         footer: (props) => props.column.id,
         size: 130,
       },
-      {
-        header: '캠페인 ID',
-        id: 'utm_campaign_id',
-        accessorKey: 'utm_campaign_id',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-        size: 130,
-      },
+      // {
+      //   header: '캠페인 ID',
+      //   id: 'utm_campaign_id',
+      //   accessorKey: 'utm_campaign_id',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 130,
+      // },
       {
         header: '소스',
         id: 'utm_source',
@@ -102,24 +111,24 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_name',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        meta: 230,
+        size: 230,
       },
-      {
-        header: '캠페인 텀',
-        id: 'utm_term',
-        accessorKey: 'utm_term',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-        size: 80,
-      },
-      {
-        header: '캠페인 콘텐츠',
-        id: 'utm_content',
-        accessorKey: 'utm_content',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-        size: 90,
-      },
+      // {
+      //   header: '캠페인 텀',
+      //   id: 'utm_term',
+      //   accessorKey: 'utm_term',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 80,
+      // },
+      // {
+      //   header: '캠페인 콘텐츠',
+      //   id: 'utm_content',
+      //   accessorKey: 'utm_content',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 90,
+      // },
       {
         header: '메모',
         id: 'utm_memo',
@@ -162,6 +171,10 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     debugTable: true,
   });
 
+  const moveUrl = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   const onChangHandler = () => {};
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
@@ -177,7 +190,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     <div className="p-2">
       <button onClick={onClickPopBtn}>추출하기</button>
       <button onClick={onClickDelBtn}>삭제하기</button>
-      <button onClick={() => setSummary(false)}>데이터 요약보기</button>
+      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
       <div className="h-2" />
       <select
         value={columnResizeMode}
@@ -186,8 +199,8 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         }
         className="border p-2 border-black rounded"
       >
-        <option value="onEnd">Resize: "onEnd"</option>
-        <option value="onChange">Resize: "onChange"</option>
+        <option value="onEnd">리사이즈: "onEnd"</option>
+        <option value="onChange">리사이즈: "onChange"</option>
       </select>
       <div className="h-4" />
       <div className="text-xl">{'<table/>'}</div>
@@ -260,6 +273,19 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         },
                       }}
                     >
+                      {cell.column.id === 'full_url' && (
+                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                      )}
+                      {cell.column.id === 'shorten_url' && (
+                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                      )}
+                      {cell.column.id === 'utm_url' && (
+                        <Tooltip title={`${cell.getValue()}`}>
+                          <button onClick={() => moveUrl(`${cell.getValue()}`)}>
+                            url 연결
+                          </button>
+                        </Tooltip>
+                      )}
                       {cell.column.id === 'utm_memo' && !show && (
                         <input
                           id={cell.id}
@@ -288,6 +314,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                           cell.getContext()
                         )}
                       {cell.column.id !== 'utm_memo' &&
+                        cell.column.id !== 'utm_url' &&
+                        cell.column.id !== 'full_url' &&
+                        cell.column.id !== 'shorten_url' &&
                         flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -309,9 +338,12 @@ function IndeterminateCheckbox({
   className = '',
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
+  const ref = useRef<HTMLInputElement>(null!);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (ref.current.indeterminate) {
+      // console.log(checked);
+    }
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }
