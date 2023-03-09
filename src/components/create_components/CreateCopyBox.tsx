@@ -26,8 +26,12 @@ export const CreateCopyBox = () => {
         {arr.map((i, idx) => (
           <div key={idx}>
             <div className={styles.itemBox}>
-              <div className={styles.full_utm}>{i.full}</div>
-              <div className={styles.short_utm}>{i.short}</div>
+              <div>
+                <div className={styles.full_utm}>{i.full}</div>
+              </div>
+              <div>
+                <div className={styles.short_utm}>{i.short}</div>
+              </div>
             </div>
           </div>
         ))}
