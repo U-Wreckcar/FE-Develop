@@ -1,8 +1,17 @@
-import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  HTMLProps,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
-import { MainTableProps } from './MainBtnTable';
+import { CopyButton } from '../../shared/button/CopyButton';
+import Tooltip from '@mui/material/Tooltip';
 import {
   ColumnDef,
   flexRender,
@@ -10,10 +19,12 @@ import {
   useReactTable,
   ColumnResizeMode,
 } from '@tanstack/react-table';
-import styles from './styles.module.css';
 import './mainStyle.css';
 
-export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
+export type MainTableProps = {
+  setSummary: Dispatch<SetStateAction<boolean>>;
+};
+export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [rowSelection, setRowSelection] = useState({});
   const [data, setData] = useState<Array<MainTableType>>([]);
   const [show, setShow] = useState(false);
@@ -146,6 +157,11 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     getCoreRowModel: getCoreRowModel(),
     debugTable: true,
   });
+
+  const moveUrl = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   const onChangHandler = () => {};
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
@@ -161,7 +177,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     <div className="p-2">
       <button onClick={onClickPopBtn}>추출하기</button>
       <button onClick={onClickDelBtn}>삭제하기</button>
-      <button onClick={() => setSummary(false)}>데이터 요약보기</button>
+      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
       <div className="h-2" />
       <select
         value={columnResizeMode}
@@ -170,8 +186,8 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         }
         className="border p-2 border-black rounded"
       >
-        <option value="onEnd">Resize: "onEnd"</option>
-        <option value="onChange">Resize: "onChange"</option>
+        <option value="onEnd">리사이즈: "onEnd"</option>
+        <option value="onChange">리사이즈: "onChange"</option>
       </select>
       <div className="h-4" />
       <div className="text-xl">{'<table/>'}</div>
@@ -205,6 +221,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         )}
                       </>
                     )}
+
                     <div
                       {...{
                         onMouseDown: header.getResizeHandler(),
@@ -243,6 +260,19 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         },
                       }}
                     >
+                      {cell.column.id === 'full_url' && (
+                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                      )}
+                      {cell.column.id === 'shorten_url' && (
+                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                      )}
+                      {cell.column.id === 'utm_url' && (
+                        <Tooltip title={`${cell.getValue()}`}>
+                          <button onClick={() => moveUrl(`${cell.getValue()}`)}>
+                            url 연결
+                          </button>
+                        </Tooltip>
+                      )}
                       {cell.column.id === 'utm_memo' && !show && (
                         <input
                           id={cell.id}
@@ -271,6 +301,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                           cell.getContext()
                         )}
                       {cell.column.id !== 'utm_memo' &&
+                        cell.column.id !== 'utm_url' &&
+                        cell.column.id !== 'full_url' &&
+                        cell.column.id !== 'shorten_url' &&
                         flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -305,9 +338,12 @@ function IndeterminateCheckbox({
   className = '',
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
+  const ref = useRef<HTMLInputElement>(null!);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (ref.current.indeterminate) {
+      // console.log(checked);
+    }
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }

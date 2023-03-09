@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { postUTM } from 'util/async/api';
+import { postUTMs } from 'util/async/api';
 import styles from './styles.module.css';
 export const InputItem = () => {
   const {
@@ -12,7 +12,7 @@ export const InputItem = () => {
 
   const onSubmit = async (data: any) => {
     console.log(JSON.stringify(data));
-    postUTM(JSON.stringify({ id: 5, url: data.url }));
+    postUTMs(JSON.stringify({ id: 5, url: data.url }));
 
     return console.log(data);
   };
