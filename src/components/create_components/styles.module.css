@@ -1,18 +1,140 @@
 /* Create Input */
-.input {
+input {
+  width: 178px;
+  height: 40px;
   border: none;
+  margin: 0 4px;
+  border-radius: 4px;
 }
-.container_create {
+@keyframes smoothAppear {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/** createCategory **/
+.container_category {
   display: flex;
-  align-items: center;
 
   width: 1590px;
   height: 40px;
 
   border-radius: 4px;
-  margin: 8px 0;
+
+  background-color: var(--color-white-200);
+  padding: 10px 54px 10px 58px;
+}
+.itemBoxs {
+  display: flex;
+  align-items: center;
+  width: 1000px;
+  height: 40px;
 }
 
-.inputBox {
+.item {
   display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 176px;
+  height: 20px;
+}
+.container_create {
+  display: flex;
+  margin: 10px 0;
+}
+/** createUtm.tsx **/
+.container {
+  animation: smoothAppear 1.5s;
+}
+
+.itemBox {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-gray);
+  width: 1590px;
+  height: 60px;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+.itemBox {
+  animation: smoothAppear 1.5s;
+}
+
+.active {
+  border: none;
+  resize: none;
+  width: 178px;
+  height: 40px;
+  margin: 0 4px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.active:focus {
+  /* position: absolute; */
+  border: 0.5px solid black;
+  width: 178px;
+  height: 150px;
+  outline: none;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 13px 0 17px;
+}
+.removeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 17px 0 13px;
+}
+.buttonBox {
+  width: 1590px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+}
+.addListBtn {
+  width: 35px;
+  height: 35px;
+
+  border: none;
+  cursor: pointer;
+}
+.createBtn {
+  width: 80px;
+  height: 35px;
+}
+
+/** Create Copy **/
+.copy_title {
+  display: flex;
+  width: 1500px;
+  margin: 0;
+}
+.utm_url {
+  width: 60%;
+}
+.utm_shorten_url {
+  width: 40%;
+}
+
+.full_utm {
+  background-color: var(--color-white-100);
+  border-radius: 4px;
+  width: 780px;
+  height: 38px;
+}
+.short_utm {
+  background-color: var(--color-white-100);
+  border-radius: 4px;
+  width: 500px;
+  height: 38px;
 }
