@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
-import { addUTM } from 'redux/slice/UTMSlice';
+import { addUTM } from 'redux/slice/utmSlice';
 import { useAppDispatch, useAppSelector } from 'util/reduxType/type';
 type propsType = {
   name: string;
