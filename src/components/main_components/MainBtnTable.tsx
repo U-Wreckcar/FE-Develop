@@ -47,6 +47,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
               onChange: table.getToggleAllRowsSelectedHandler(),
+              size: 50,
             }}
           />
         ),
@@ -58,38 +59,43 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                 disabled: !row.getCanSelect(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
+                size: 50,
               }}
             />
           </div>
         ),
       },
-      {
-        header: '생성일자',
-        id: 'created_at',
-        accessorKey: 'created_at',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-      },
+      // {
+      //   header: '생성일자',
+      //   id: 'created_at-80',
+      //   accessorKey: 'created_at',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 80,
+      // },
       {
         header: 'URL',
         id: 'utm_url',
         accessorKey: 'utm_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
-      {
-        header: '캠페인 ID',
-        id: 'utm_campaign_id',
-        accessorKey: 'utm_campaign_id',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-      },
+      // {
+      //   header: '캠페인 ID',
+      //   id: 'utm_campaign_id',
+      //   accessorKey: 'utm_campaign_id',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 130,
+      // },
       {
         header: '소스',
         id: 'utm_source',
         accessorKey: 'utm_source',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: '미디움',
@@ -97,6 +103,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_medium',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: '캠페인 이름',
@@ -104,27 +111,31 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_name',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 230,
       },
-      {
-        header: '캠페인 텀',
-        id: 'utm_term',
-        accessorKey: 'utm_term',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-      },
-      {
-        header: '캠페인 콘텐츠',
-        id: 'utm_content',
-        accessorKey: 'utm_content',
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
-      },
+      // {
+      //   header: '캠페인 텀',
+      //   id: 'utm_term',
+      //   accessorKey: 'utm_term',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 80,
+      // },
+      // {
+      //   header: '캠페인 콘텐츠',
+      //   id: 'utm_content',
+      //   accessorKey: 'utm_content',
+      //   cell: (info) => info.getValue(),
+      //   footer: (props) => props.column.id,
+      //   width: 90,
+      // },
       {
         header: '메모',
         id: 'utm_memo',
         accessorKey: 'utm_memo',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: 'UTM',
@@ -132,6 +143,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'full_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: 'Shorten URL',
@@ -139,6 +151,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'shorten_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
     ],
     []
@@ -315,19 +328,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
             );
           })}
         </tbody>
-        <tfoot>
-          <tr>
-            <td className="p-1">
-              <IndeterminateCheckbox
-                {...{
-                  checked: table.getIsAllPageRowsSelected(),
-                  indeterminate: table.getIsSomePageRowsSelected(),
-                  onChange: table.getToggleAllPageRowsSelectedHandler(),
-                }}
-              />
-            </td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );

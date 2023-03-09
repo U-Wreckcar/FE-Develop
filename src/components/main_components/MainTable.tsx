@@ -10,7 +10,6 @@ import {
   useReactTable,
   ColumnResizeMode,
 } from '@tanstack/react-table';
-import styles from './styles.module.css';
 import './mainStyle.css';
 
 export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
@@ -36,6 +35,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
               onChange: table.getToggleAllRowsSelectedHandler(),
+              size: 50,
             }}
           />
         ),
@@ -47,6 +47,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                 disabled: !row.getCanSelect(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
+                size: 50,
               }}
             />
           </div>
@@ -58,6 +59,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'created_at',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: 'URL',
@@ -65,6 +67,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: '캠페인 ID',
@@ -72,6 +75,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_id',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: '소스',
@@ -79,6 +83,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_source',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: '미디움',
@@ -86,6 +91,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_medium',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: '캠페인 이름',
@@ -93,6 +99,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_name',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        meta: 230,
       },
       {
         header: '캠페인 텀',
@@ -100,6 +107,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_term',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
       {
         header: '캠페인 콘텐츠',
@@ -107,6 +115,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_content',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 90,
       },
       {
         header: '메모',
@@ -114,6 +123,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_memo',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: 'UTM',
@@ -121,6 +131,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'full_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 130,
       },
       {
         header: 'Shorten URL',
@@ -128,6 +139,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'shorten_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
+        size: 80,
       },
     ],
     []
@@ -146,6 +158,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     getCoreRowModel: getCoreRowModel(),
     debugTable: true,
   });
+
   const onChangHandler = () => {};
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
@@ -205,6 +218,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         )}
                       </>
                     )}
+
                     <div
                       {...{
                         onMouseDown: header.getResizeHandler(),
@@ -282,19 +296,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
             );
           })}
         </tbody>
-        <tfoot>
-          <tr>
-            <td className="p-1">
-              <IndeterminateCheckbox
-                {...{
-                  checked: table.getIsAllPageRowsSelected(),
-                  indeterminate: table.getIsSomePageRowsSelected(),
-                  onChange: table.getToggleAllPageRowsSelectedHandler(),
-                }}
-              />
-            </td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );
