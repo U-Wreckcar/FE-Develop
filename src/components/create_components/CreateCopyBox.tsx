@@ -1,4 +1,5 @@
 import React from 'react';
+import { CopyButton } from 'shared/button/CopyButton';
 import { mapDefined } from 'tslint/lib/utils';
 import styles from './styles.module.css';
 export const CreateCopyBox = () => {
@@ -28,9 +29,11 @@ export const CreateCopyBox = () => {
             <div className={styles.itemBox}>
               <div>
                 <div className={styles.full_utm}>{i.full}</div>
+                <CopyButton text={i.full} />
               </div>
               <div>
                 <div className={styles.short_utm}>{i.short}</div>
+                <CopyButton text={i.short} />
               </div>
             </div>
           </div>
