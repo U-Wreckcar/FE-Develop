@@ -96,6 +96,11 @@ input[type="checkbox"]{
   height: 10px;
 }
 
+input[type="text"]{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 .button {
 width: 80px;
 height: 40px;

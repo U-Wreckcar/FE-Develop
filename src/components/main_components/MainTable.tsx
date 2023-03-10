@@ -1,4 +1,4 @@
-import React, { HTMLProps, useMemo, useEffect, useState } from 'react';
+import React, { HTMLProps, useMemo, useEffect, useState, useRef } from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
@@ -28,75 +28,6 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   useEffect(() => {
     setData(getUTMRes.data);
   }, [getUTMRes]);
-
-  function Filter({
-    column,
-    table,
-  }: {
-    column: Column<any, any>;
-    table: Table<any>;
-  }) {
-    const firstValue = table
-      .getPreFilteredRowModel()
-      .flatRows[0]?.getValue(column.id);
-
-    return typeof firstValue === 'number' ? (
-      <div className="flex space-x-2">
-        <input
-          type="number"
-          value={((column.getFilterValue() as any)?.[0] ?? '') as string}
-          onChange={(e) =>
-            column.setFilterValue((old: any) => [e.target.value, old?.[1]])
-          }
-          placeholder={`Min`}
-          className="w-24 border shadow rounded"
-        />
-        <input
-          type="number"
-          value={((column.getFilterValue() as any)?.[1] ?? '') as string}
-          onChange={(e) =>
-            column.setFilterValue((old: any) => [old?.[0], e.target.value])
-          }
-          placeholder={`Max`}
-          className="w-24 border shadow rounded"
-        />
-      </div>
-    ) : (
-      <input
-        type="text"
-        value={(column.getFilterValue() ?? '') as string}
-        onChange={(e) => column.setFilterValue(e.target.value)}
-        placeholder={`Search...`}
-        className="w-36 border shadow rounded"
-      />
-    );
-  }
-
-  function IndeterminateCheckbox({
-    indeterminate,
-    className = '',
-    ...rest
-  }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-    const ref = React.useRef<HTMLInputElement>(null!);
-
-    useEffect(() => {
-      if (ref.current.indeterminate) {
-        // console.log(checked);
-      }
-      if (typeof indeterminate === 'boolean') {
-        ref.current.indeterminate = !rest.checked && indeterminate;
-      }
-    }, [ref, indeterminate]);
-
-    return (
-      <input
-        type="checkbox"
-        ref={ref}
-        className={className + ' cursor-pointer'}
-        {...rest}
-      />
-    );
-  }
 
   const columns = useMemo<ColumnDef<MainTableType>[]>(
     () => [
@@ -258,16 +189,16 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
           <button className={styles.button}>필터</button>
         </div>
         <div className="h-2" />
-        <select
+        {/* <select
           value={columnResizeMode}
           onChange={(e) =>
             setColumnResizeMode(e.target.value as ColumnResizeMode)
           }
           className="border p-2 border-black rounded"
         >
-          <option value="onEnd">Resize: "onEnd"</option>
-          <option value="onChange">Resize: "onChange"</option>
-        </select>
+          <option value="onEnd">리사이즈: "onEnd"</option>
+          <option value="onChange">리사이즈: "onChange"</option>
+        </select> */}
         <div className="h-4" />
         <div className="overflow-x-auto"></div>
         <table
@@ -388,3 +319,68 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     </div>
   );
 };
+
+function Filter({
+  column,
+  table,
+}: {
+  column: Column<any, any>;
+  table: Table<any>;
+}) {
+  const firstValue = table
+    .getPreFilteredRowModel()
+    .flatRows[0]?.getValue(column.id);
+
+  return typeof firstValue === 'number' ? (
+    <div className="flex space-x-2">
+      <input
+        type="number"
+        value={((column.getFilterValue() as any)?.[0] ?? '') as string}
+        onChange={(e) =>
+          column.setFilterValue((old: any) => [e.target.value, old?.[1]])
+        }
+        placeholder={`Min`}
+        className="w-24 border shadow rounded"
+      />
+      <input
+        type="number"
+        value={((column.getFilterValue() as any)?.[1] ?? '') as string}
+        onChange={(e) =>
+          column.setFilterValue((old: any) => [old?.[0], e.target.value])
+        }
+        placeholder={`Max`}
+        className="w-24 border shadow rounded"
+      />
+    </div>
+  ) : (
+    <input
+      type="text"
+      value={(column.getFilterValue() ?? '') as string}
+      onChange={(e) => column.setFilterValue(e.target.value)}
+      placeholder={`Search...`}
+      className="w-36 border shadow rounded"
+    />
+  );
+}
+function IndeterminateCheckbox({
+  indeterminate,
+  className = '',
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = useRef<HTMLInputElement>(null!);
+
+  useEffect(() => {
+    if (typeof indeterminate === 'boolean') {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+  }, [ref, indeterminate]);
+
+  return (
+    <input
+      type="checkbox"
+      ref={ref}
+      className={className + ' cursor-pointer'}
+      {...rest}
+    />
+  );
+}
