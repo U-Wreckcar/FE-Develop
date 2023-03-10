@@ -13,11 +13,14 @@ import { getUTMs } from 'util/async/api';
 import { CopyButton } from '../../shared/button/CopyButton';
 import Tooltip from '@mui/material/Tooltip';
 import {
+  Table,
+  Column,
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   ColumnResizeMode,
+  getFilteredRowModel,
 } from '@tanstack/react-table';
 import styles from './styles.module.css';
 
@@ -32,6 +35,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const getUTMRes = useGetUtm(getUTMs);
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>('onChange');
+  const [globalFilter, setGlobalFilter] = useState('');
 
   useEffect(() => {
     setData(getUTMRes.data);
@@ -132,6 +136,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     },
     enableRowSelection: true, //enable row selection for all rows
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     debugTable: true,
@@ -207,6 +212,11 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                          {header.column.getCanFilter() ? (
+                            <div>
+                              <Filter column={header.column} table={table} />
+                            </div>
+                          ) : null}
                         </>
                       )}
 
@@ -312,6 +322,49 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     </>
   );
 };
+
+function Filter({
+  column,
+  table,
+}: {
+  column: Column<any, any>;
+  table: Table<any>;
+}) {
+  const firstValue = table
+    .getPreFilteredRowModel()
+    .flatRows[0]?.getValue(column.id);
+
+  return typeof firstValue === 'number' ? (
+    <div className="flex space-x-2">
+      <input
+        type="number"
+        value={((column.getFilterValue() as any)?.[0] ?? '') as string}
+        onChange={(e) =>
+          column.setFilterValue((old: any) => [e.target.value, old?.[1]])
+        }
+        placeholder={`Min`}
+        className="w-24 border shadow rounded"
+      />
+      <input
+        type="number"
+        value={((column.getFilterValue() as any)?.[1] ?? '') as string}
+        onChange={(e) =>
+          column.setFilterValue((old: any) => [old?.[0], e.target.value])
+        }
+        placeholder={`Max`}
+        className="w-24 border shadow rounded"
+      />
+    </div>
+  ) : (
+    <input
+      type="text"
+      value={(column.getFilterValue() ?? '') as string}
+      onChange={(e) => column.setFilterValue(e.target.value)}
+      placeholder={`Search...`}
+      className="w-36 border shadow rounded"
+    />
+  );
+}
 
 function IndeterminateCheckbox({
   indeterminate,
