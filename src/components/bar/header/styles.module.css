@@ -1,0 +1,29 @@
+.nav {
+    /* position: fixed; */
+    height: 80px;
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 25px;
+    padding-left: 25px;
+    align-items: center;
+}
+
+.user_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user_img{
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 15px;
+}
+
+.bold_text {
+font-weight: 700;
+}
