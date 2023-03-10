@@ -6,13 +6,12 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 // import styles from './styles.module.css';
 import styles from './stylestest.module.css';
-import React, { memo, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 /**
  * Style
  */
 // import styles from './stylestest.module.css';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 type UTMsType = {
   utms: {
     utm_url?: string;
@@ -28,13 +27,10 @@ type UTMsType = {
 
 export const CreateUtm = () => {
   const id = nanoid();
-  const [memoFocuse, setFocuse] = useState(false);
   const [memoText, setMemoText] = useState('');
-  const memoRef = useRef();
   const {
     handleSubmit,
     register,
-    watch,
     control,
     formState: { errors },
   } = useForm<UTMsType>({

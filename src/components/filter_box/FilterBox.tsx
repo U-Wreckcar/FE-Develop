@@ -6,7 +6,7 @@ import { KeyWord } from 'components/filter_box/category/KeyWord';
 import styles from './styles.module.css';
 import { useAppSelector } from 'util/reduxType/type';
 export default function FilterBox() {
-  const res = useAppSelector((state) => state.filter.filterItem);
+  const res = useAppSelector((state) => state.filter.tag);
   console.log(res);
   const cadsf = [<CreateAt />, <Source />, <Medium />, <KeyWord />];
 
@@ -19,9 +19,25 @@ export default function FilterBox() {
           </div>
         );
       })}
-      {res.map((item, idx) => (
-        <div key={idx}>{item.date_scope}</div>
-      ))}
+
+      <div>{res?.create_st}</div>
+      <div>{res?.utm_source}</div>
+      <div>{res?.keyword_target}</div>
+      {/* {res?.map((item, idx) => {
+        if (item.utm_source) {
+          const sourceMapValue = item.utm_source;
+          return `소스 : ${sourceMapValue}`;
+        } else if (item.date_scope) {
+          return `생성 일자 :${item.date_scope}`;
+        } else {
+          return (
+            <div key={idx}>
+              <div className={styles.filter_tag}>{item.date_scope}</div>
+              <div className={styles.filter_tag}>{item.utm_source}</div>
+            </div>
+          );
+        }
+      })} */}
     </div>
   );
 }
