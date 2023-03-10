@@ -175,9 +175,13 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
           <button className={styles.data_btn} onClick={() => setSummary(false)}>
             데이터 요약보기
           </button>
-          <button onClick={onClickPopBtn}>추출하기</button>
-          <button onClick={onClickDelBtn}>삭제하기</button>
-          <button>필터</button>
+          <button className={styles.button} onClick={onClickPopBtn}>
+            추출하기
+          </button>
+          <button className={styles.button} onClick={onClickDelBtn}>
+            삭제하기
+          </button>
+          <button className={styles.button}>필터</button>
         </div>
         <div className="h-2" />
         <select
