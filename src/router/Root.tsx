@@ -9,7 +9,10 @@ export const Root = () => {
   const path = window.location.pathname;
 
   useEffect(() => {
-    if (window.location.pathname !== '/') {
+    if (
+      window.location.pathname !== '/' &&
+      window.location.pathname !== '/login'
+    ) {
       setState(true);
     } else {
       setState(false);
@@ -17,13 +20,14 @@ export const Root = () => {
   }, [path]);
   return (
     <div>
-      {state && (
+      {state ? (
         <>
           <SideNav />
           <Header />
         </>
+      ) : (
+        <RenderHeader />
       )}
-      {/* <RenderHeader /> */}
       <Outlet />
     </div>
   );
