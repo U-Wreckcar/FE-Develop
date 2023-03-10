@@ -1,13 +1,22 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import { addFilterItem, setAddFilterItem } from 'redux/slice/filterSlice';
 import { useAppSelector, useAppDispatch } from 'util/reduxType/type';
 
 export const Calendar = () => {
+  const [dateScope, setDateScope] = useState();
   const startRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
   const cenhandler = (event: FormEvent) => {
     event.preventDefault();
     const dateCel = `${startRef.current?.value}~${endRef.current?.value} `;
+    const stRefRes: any = startRef.current?.value;
+    const dispatchValue: any = {
+      create_st: stRefRes,
+    };
+    dispatch(setAddFilterItem(dispatchValue));
+    // dispatch(addFilterItem(dispatchValue));
   };
   return (
     <form onSubmit={cenhandler}>

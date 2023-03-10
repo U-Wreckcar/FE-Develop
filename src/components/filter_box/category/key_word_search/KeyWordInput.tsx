@@ -4,7 +4,7 @@ export const KeyWordInput = () => {
   return (
     <div>
       <input />
-      <button>버튼 </button>
+      <button>버튼</button>
     </div>
   );
 };
