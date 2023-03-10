@@ -172,7 +172,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
           </button>
         </div>
         <div className="h-2" />
-        <select
+        {/* <select
           value={columnResizeMode}
           onChange={(e) =>
             setColumnResizeMode(e.target.value as ColumnResizeMode)
@@ -181,7 +181,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         >
           <option value="onEnd">리사이즈: "onEnd"</option>
           <option value="onChange">리사이즈: "onChange"</option>
-        </select>
+        </select> */}
         <div className="h-4" />
         <div className="overflow-x-auto"></div>
         <table
@@ -374,9 +374,6 @@ function IndeterminateCheckbox({
   const ref = useRef<HTMLInputElement>(null!);
 
   useEffect(() => {
-    if (ref.current.indeterminate) {
-      // console.log(checked);
-    }
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }
