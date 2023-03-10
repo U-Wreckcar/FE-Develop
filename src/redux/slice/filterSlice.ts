@@ -8,7 +8,7 @@ type FilterItem = {
   utm_medium?: string | null;
   keyword?: string | null;
   keyword_target?: string | null;
-  date_scope?: string | null;
+  date_scope?: string | undefined | null;
 };
 interface FilterState {
   filterItem: Array<FilterItem>;

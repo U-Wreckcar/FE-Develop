@@ -6,7 +6,6 @@ type filterItem = {
   date_scope: string;
 };
 export const CalendarButtonBox = () => {
-  const [addDate, setAddDate] = useState<filterItem | null>(null);
   const dispatch = useAppDispatch();
   const res = useAppSelector((state) => state);
   console.log(res);
@@ -15,8 +14,6 @@ export const CalendarButtonBox = () => {
   const monthRef = useRef<HTMLInputElement>(null);
   const todayHandler = () => {
     const refValue: any = dateRef.current?.value;
-    console.log(addDate);
-    setAddDate(refValue);
     const disPatchData = {
       date_scope: refValue,
     };
