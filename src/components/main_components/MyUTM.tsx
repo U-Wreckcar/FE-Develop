@@ -8,5 +8,6 @@ export const MyUTM = () => {
   // console.log('sdfsdf', res);
   useGetUtm(getUTMs);
   // console.log(useGetUtm(getUTM).data);
+
   return <div></div>;
 };

@@ -3,7 +3,7 @@ import React from 'react';
 export const useGetUtm = (api: any) => {
   return useQuery(['utms'], async () => {
     const { data } = await api;
-    console.log(data);
+    // console.log(data);
     return data;
   });
 };

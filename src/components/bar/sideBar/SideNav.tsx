@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PlusSideNav } from './PlusSideNav';
 import { SlimSideNav } from './SlimSideNav';
 import styles from './styles.module.css';
 
 export const SideNav = () => {
   const [side, setSide] = useState(true);
-
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+        setSide(false);
+      } else if (window.innerWidth >= 768) {
+        setSide(true);
+      }
+    });
+  }, []);
   return (
     <div>
       {side ? (
-        <PlusSideNav setSide={setSide} />
+        <PlusSideNav setSide={setSide} side={side} />
       ) : (
-        <SlimSideNav setSide={setSide} />
+        <SlimSideNav setSide={setSide} side={side} />
       )}
     </div>
   );

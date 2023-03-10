@@ -19,7 +19,7 @@ import {
   useReactTable,
   ColumnResizeMode,
 } from '@tanstack/react-table';
-import './mainStyle.css';
+import styles from './styles.module.css';
 
 export type MainTableProps = {
   setSummary: Dispatch<SetStateAction<boolean>>;
@@ -47,55 +47,37 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
               onChange: table.getToggleAllRowsSelectedHandler(),
-              size: 50,
             }}
           />
         ),
         cell: ({ row }) => (
-          <div className="px-1">
+          <div className={styles.input_box}>
             <IndeterminateCheckbox
               {...{
                 checked: row.getIsSelected(),
                 disabled: !row.getCanSelect(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
-                size: 50,
               }}
             />
           </div>
         ),
       },
-      // {
-      //   header: '생성일자',
-      //   id: 'created_at-80',
-      //   accessorKey: 'created_at',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 80,
-      // },
       {
         header: 'URL',
         id: 'utm_url',
         accessorKey: 'utm_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
-      // {
-      //   header: '캠페인 ID',
-      //   id: 'utm_campaign_id',
-      //   accessorKey: 'utm_campaign_id',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 130,
-      // },
       {
         header: '소스',
         id: 'utm_source',
         accessorKey: 'utm_source',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: '미디움',
@@ -103,7 +85,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_medium',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: '캠페인 이름',
@@ -111,31 +93,15 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_name',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 230,
+        maxSize: 230,
       },
-      // {
-      //   header: '캠페인 텀',
-      //   id: 'utm_term',
-      //   accessorKey: 'utm_term',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 80,
-      // },
-      // {
-      //   header: '캠페인 콘텐츠',
-      //   id: 'utm_content',
-      //   accessorKey: 'utm_content',
-      //   cell: (info) => info.getValue(),
-      //   footer: (props) => props.column.id,
-      //   width: 90,
-      // },
       {
         header: '메모',
         id: 'utm_memo',
         accessorKey: 'utm_memo',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: 'UTM',
@@ -143,7 +109,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'full_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: 'Shorten URL',
@@ -151,7 +117,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'shorten_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
     ],
     []
@@ -187,149 +153,159 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     console.log(id);
   };
   return (
-    <div className="p-2">
-      <button onClick={onClickPopBtn}>추출하기</button>
-      <button onClick={onClickDelBtn}>삭제하기</button>
-      <button onClick={() => setSummary(true)}>데이터 상세보기</button>
-      <div className="h-2" />
-      <select
-        value={columnResizeMode}
-        onChange={(e) =>
-          setColumnResizeMode(e.target.value as ColumnResizeMode)
-        }
-        className="border p-2 border-black rounded"
-      >
-        <option value="onEnd">리사이즈: "onEnd"</option>
-        <option value="onChange">리사이즈: "onChange"</option>
-      </select>
-      <div className="h-4" />
-      <div className="text-xl">{'<table/>'}</div>
-      <div className="overflow-x-auto"></div>
-      <table
-        {...{
-          style: {
-            width: table.getCenterTotalSize(),
-          },
-        }}
-      >
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    {...{
-                      key: header.id,
-                      colSpan: header.colSpan,
-                      style: {
-                        width: header.getSize(),
-                      },
-                    }}
-                  >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </>
-                    )}
-
-                    <div
-                      {...{
-                        onMouseDown: header.getResizeHandler(),
-                        onTouchStart: header.getResizeHandler(),
-                        className: `resizer ${
-                          header.column.getIsResizing() ? 'isResizing' : ''
-                        }`,
-                        style: {
-                          transform:
-                            columnResizeMode === 'onEnd' &&
-                            header.column.getIsResizing()
-                              ? `translateX(${
-                                  table.getState().columnSizingInfo.deltaOffset
-                                }px)`
-                              : '',
-                        },
-                      }}
-                    />
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+    <>
+      <div className={styles.container}>
+        <div className={styles.btn_box}>
+          <button className={styles.data_btn} onClick={() => setSummary(true)}>
+            데이터 상세보기
+          </button>
+          <button onClick={onClickPopBtn}>추출하기</button>
+          <button onClick={onClickDelBtn}>삭제하기</button>
+        </div>
+        <div className="h-2" />
+        <select
+          value={columnResizeMode}
+          onChange={(e) =>
+            setColumnResizeMode(e.target.value as ColumnResizeMode)
+          }
+          className="border p-2 border-black rounded"
+        >
+          <option value="onEnd">리사이즈: "onEnd"</option>
+          <option value="onChange">리사이즈: "onChange"</option>
+        </select>
+        <div className="h-4" />
+        <div className="overflow-x-auto"></div>
+        <table
+          className={styles.table}
+          {...{
+            style: {
+              maxWidth: table.getCenterTotalSize(),
+            },
+          }}
+        >
+          <thead className={styles.th}>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <td
+                    <th
                       {...{
-                        key: cell.id,
+                        key: header.id,
+                        colSpan: header.colSpan,
                         style: {
-                          width: cell.column.getSize(),
+                          width: header.getSize(),
                         },
                       }}
                     >
-                      {cell.column.id === 'full_url' && (
-                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </>
                       )}
-                      {cell.column.id === 'shorten_url' && (
-                        <CopyButton text={`${cell.getValue()}`}></CopyButton>
-                      )}
-                      {cell.column.id === 'utm_url' && (
-                        <Tooltip title={`${cell.getValue()}`}>
-                          <button onClick={() => moveUrl(`${cell.getValue()}`)}>
-                            url 연결
-                          </button>
-                        </Tooltip>
-                      )}
-                      {cell.column.id === 'utm_memo' && !show && (
-                        <input
-                          id={cell.id}
-                          style={{ border: 'none' }}
-                          value={`${cell.getValue()}`}
-                          onFocus={(e) => {
-                            setTarget(e.target.id);
-                            setShow(true);
-                          }}
-                        />
-                      )}
-                      {cell.column.id === 'utm_memo' &&
-                        show &&
-                        target === cell.id && (
-                          <textarea
-                            value={`${cell.getValue()}`}
-                            onBlur={() => setShow(false)}
-                            onChange={onChangHandler}
-                          />
-                        )}
-                      {cell.column.id === 'utm_memo' &&
-                        show &&
-                        target !== cell.id &&
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      {cell.column.id !== 'utm_memo' &&
-                        cell.column.id !== 'utm_url' &&
-                        cell.column.id !== 'full_url' &&
-                        cell.column.id !== 'shorten_url' &&
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                    </td>
+
+                      <div
+                        {...{
+                          onMouseDown: header.getResizeHandler(),
+                          onTouchStart: header.getResizeHandler(),
+                          className: `resizer ${
+                            header.column.getIsResizing() ? 'isResizing' : ''
+                          }`,
+                          style: {
+                            transform:
+                              columnResizeMode === 'onEnd' &&
+                              header.column.getIsResizing()
+                                ? `translateX(${
+                                    table.getState().columnSizingInfo
+                                      .deltaOffset
+                                  }px)`
+                                : '',
+                          },
+                        }}
+                      />
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td
+                        className={styles.td}
+                        {...{
+                          key: cell.id,
+                          style: {
+                            width: cell.column.getSize(),
+                          },
+                        }}
+                      >
+                        {cell.column.id === 'full_url' && (
+                          <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                        )}
+                        {cell.column.id === 'shorten_url' && (
+                          <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                        )}
+                        {cell.column.id === 'utm_url' && (
+                          <Tooltip title={`${cell.getValue()}`}>
+                            <button
+                              onClick={() => moveUrl(`${cell.getValue()}`)}
+                            >
+                              url 연결
+                            </button>
+                          </Tooltip>
+                        )}
+                        {cell.column.id === 'utm_memo' && !show && (
+                          <input
+                            id={cell.id}
+                            style={{ border: 'none' }}
+                            value={`${cell.getValue()}`}
+                            onFocus={(e) => {
+                              setTarget(e.target.id);
+                              setShow(true);
+                            }}
+                          />
+                        )}
+                        {cell.column.id === 'utm_memo' &&
+                          show &&
+                          target === cell.id && (
+                            <textarea
+                              value={`${cell.getValue()}`}
+                              onBlur={() => setShow(false)}
+                              onChange={onChangHandler}
+                            />
+                          )}
+                        {cell.column.id === 'utm_memo' &&
+                          show &&
+                          target !== cell.id &&
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        {cell.column.id !== 'utm_memo' &&
+                          cell.column.id !== 'utm_url' &&
+                          cell.column.id !== 'full_url' &&
+                          cell.column.id !== 'shorten_url' &&
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

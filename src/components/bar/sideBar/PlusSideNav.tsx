@@ -6,9 +6,10 @@ import { AddUtmModal } from './AddUtmModal';
 
 export type setSideProps = {
   setSide: Dispatch<SetStateAction<boolean>>;
+  side: boolean;
 };
 
-export const PlusSideNav: React.FC<setSideProps> = ({ setSide }) => {
+export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
   const [modal, setModal] = useState(false);
 
   const customStyles = {
@@ -28,28 +29,30 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide }) => {
     setModal(false);
   };
   return (
-    <div>
+    <div className={styles.plus_container}>
       <div>
-        <img></img>
-        <button onClick={() => setSide(false)}>←</button>
-      </div>
-      <div className={styles.title}></div>
-      {/* <Link to="/">HOME</Link> */}
-      {/* <Link to="/main">utm 관리</Link> */}
-      <div>
-        <Link to="/createutm">새 UTM 생성하기</Link>
-      </div>
-      {/* <Link to="/userinfo">유저정보</Link> */}
-      <div>
-        <p onClick={() => setModal(!modal)}>기존 UTM 추가하기</p>
-        <AddUtmModal
-          isOpen={modal}
-          onRequestClose={closeModal}
-          style={customStyles}
-        />
-      </div>
-      <div>
-        <Link to="/main"> UTM 관리하기</Link>
+        <div>
+          <img></img>
+          <button onClick={() => setSide(false)}>←</button>
+        </div>
+        <div className={styles.title}></div>
+        {/* <Link to="/">HOME</Link> */}
+        {/* <Link to="/main">utm 관리</Link> */}
+        <div>
+          <Link to="/createutm">새 UTM 생성하기</Link>
+        </div>
+        {/* <Link to="/userinfo">유저정보</Link> */}
+        <div>
+          <p onClick={() => setModal(!modal)}>기존 UTM 추가하기</p>
+          <AddUtmModal
+            isOpen={modal}
+            onRequestClose={closeModal}
+            style={customStyles}
+          />
+        </div>
+        <div>
+          <Link to="/main"> UTM 관리하기</Link>
+        </div>
       </div>
       <div>
         <h4>유렉카</h4>

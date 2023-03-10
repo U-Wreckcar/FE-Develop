@@ -1,7 +1,6 @@
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 // import styles from './styles.module.css';
 import styles from './stylestest.module.css';
-import { utms } from 'redux/slice/utmSlice';
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 type UTMsType = {
