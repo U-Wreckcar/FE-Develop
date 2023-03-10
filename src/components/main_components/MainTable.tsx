@@ -57,7 +57,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'created_at',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: 'URL',
@@ -65,7 +65,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: '캠페인 ID',
@@ -73,7 +73,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_id',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: '소스',
@@ -81,7 +81,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_source',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: '미디움',
@@ -89,7 +89,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_medium',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: '캠페인 이름',
@@ -97,7 +97,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_campaign_name',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        meta: 230,
+        maxSize: 230,
       },
       {
         header: '캠페인 텀',
@@ -105,7 +105,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_term',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
       {
         header: '캠페인 콘텐츠',
@@ -113,7 +113,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_content',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 90,
+        maxSize: 90,
       },
       {
         header: '메모',
@@ -121,7 +121,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'utm_memo',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: 'UTM',
@@ -129,7 +129,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'full_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 130,
+        maxSize: 130,
       },
       {
         header: 'Shorten URL',
@@ -137,7 +137,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
         accessorKey: 'shorten_url',
         cell: (info) => info.getValue(),
         footer: (props) => props.column.id,
-        size: 80,
+        maxSize: 80,
       },
     ],
     []
@@ -169,132 +169,140 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     console.log(id);
   };
   return (
-    <div className="p-2">
-      <button onClick={onClickPopBtn}>추출하기</button>
-      <button onClick={onClickDelBtn}>삭제하기</button>
-      <button onClick={() => setSummary(false)}>데이터 요약보기</button>
-      <div className="h-2" />
-      <select
-        value={columnResizeMode}
-        onChange={(e) =>
-          setColumnResizeMode(e.target.value as ColumnResizeMode)
-        }
-        className="border p-2 border-black rounded"
-      >
-        <option value="onEnd">Resize: "onEnd"</option>
-        <option value="onChange">Resize: "onChange"</option>
-      </select>
-      <div className="h-4" />
-      <div className="overflow-x-auto"></div>
-      <table
-        {...{
-          style: {
-            width: table.getCenterTotalSize(),
-          },
-        }}
-      >
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    {...{
-                      key: header.id,
-                      colSpan: header.colSpan,
-                      style: {
-                        width: header.getSize(),
-                      },
-                    }}
-                  >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </>
-                    )}
-
-                    <div
-                      {...{
-                        onMouseDown: header.getResizeHandler(),
-                        onTouchStart: header.getResizeHandler(),
-                        className: `resizer ${
-                          header.column.getIsResizing() ? 'isResizing' : ''
-                        }`,
-                        style: {
-                          transform:
-                            columnResizeMode === 'onEnd' &&
-                            header.column.getIsResizing()
-                              ? `translateX(${
-                                  table.getState().columnSizingInfo.deltaOffset
-                                }px)`
-                              : '',
-                        },
-                      }}
-                    />
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+    <>
+      <div className={styles.container}>
+        <div className={styles.btn_box}>
+          <button className={styles.data_btn} onClick={() => setSummary(false)}>
+            데이터 요약보기
+          </button>
+          <button onClick={onClickPopBtn}>추출하기</button>
+          <button onClick={onClickDelBtn}>삭제하기</button>
+          <button>필터</button>
+        </div>
+        <div className="h-2" />
+        <select
+          value={columnResizeMode}
+          onChange={(e) =>
+            setColumnResizeMode(e.target.value as ColumnResizeMode)
+          }
+          className="border p-2 border-black rounded"
+        >
+          <option value="onEnd">Resize: "onEnd"</option>
+          <option value="onChange">Resize: "onChange"</option>
+        </select>
+        <div className="h-4" />
+        <div className="overflow-x-auto"></div>
+        <table
+          {...{
+            style: {
+              width: table.getCenterTotalSize(),
+            },
+          }}
+        >
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <td
+                    <th
                       {...{
-                        key: cell.id,
+                        key: header.id,
+                        colSpan: header.colSpan,
                         style: {
-                          width: cell.column.getSize(),
+                          width: header.getSize(),
                         },
                       }}
                     >
-                      {cell.column.id === 'utm_memo' && !show && (
-                        <input
-                          id={cell.id}
-                          style={{ border: 'none' }}
-                          value={`${cell.getValue()}`}
-                          onFocus={(e) => {
-                            setTarget(e.target.id);
-                            setShow(true);
-                          }}
-                        />
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </>
                       )}
-                      {cell.column.id === 'utm_memo' &&
-                        show &&
-                        target === cell.id && (
-                          <textarea
-                            value={`${cell.getValue()}`}
-                            onBlur={() => setShow(false)}
-                            onChange={onChangHandler}
-                          />
-                        )}
-                      {cell.column.id === 'utm_memo' &&
-                        show &&
-                        target !== cell.id &&
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      {cell.column.id !== 'utm_memo' &&
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                    </td>
+
+                      <div
+                        {...{
+                          onMouseDown: header.getResizeHandler(),
+                          onTouchStart: header.getResizeHandler(),
+                          className: `resizer ${
+                            header.column.getIsResizing() ? 'isResizing' : ''
+                          }`,
+                          style: {
+                            transform:
+                              columnResizeMode === 'onEnd' &&
+                              header.column.getIsResizing()
+                                ? `translateX(${
+                                    table.getState().columnSizingInfo
+                                      .deltaOffset
+                                  }px)`
+                                : '',
+                          },
+                        }}
+                      />
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td
+                        {...{
+                          key: cell.id,
+                          style: {
+                            width: cell.column.getSize(),
+                          },
+                        }}
+                      >
+                        {cell.column.id === 'utm_memo' && !show && (
+                          <input
+                            id={cell.id}
+                            style={{ border: 'none' }}
+                            value={`${cell.getValue()}`}
+                            onFocus={(e) => {
+                              setTarget(e.target.id);
+                              setShow(true);
+                            }}
+                          />
+                        )}
+                        {cell.column.id === 'utm_memo' &&
+                          show &&
+                          target === cell.id && (
+                            <textarea
+                              value={`${cell.getValue()}`}
+                              onBlur={() => setShow(false)}
+                              onChange={onChangHandler}
+                            />
+                          )}
+                        {cell.column.id === 'utm_memo' &&
+                          show &&
+                          target !== cell.id &&
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        {cell.column.id !== 'utm_memo' &&
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
