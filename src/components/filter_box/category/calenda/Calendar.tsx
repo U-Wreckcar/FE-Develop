@@ -26,7 +26,7 @@ export const Calendar = () => {
           type="date"
           id="start"
           name="trip-start"
-          min="2023-05-05"
+          min="2023.05.05"
           max="2024-12-31"
         />
       </label>
