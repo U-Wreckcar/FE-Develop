@@ -1,13 +1,13 @@
 import { Calendar } from './calenda/Calendar';
 import { CalendarButtonBox } from './calenda/CalendarButtonBox';
-import styles from './categoryStyles.module.css';
+// import styles from './categoryStyles.module.css';
 export const CreateAt = () => {
   // const dispatch = useAppDispatch();
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className="category_tilte">생성일자</div>
-      <div className={styles.container}>
+      <div>
         <Calendar />
         <CalendarButtonBox />
       </div>
