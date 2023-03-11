@@ -434,7 +434,6 @@ function Filter({
   );
   const dateHandler = (e: any) => {
     const f = e.target.value;
-    console.log(f.replace(/\-/g, ''));
     setS(f.replace(/\-/g, '.'));
   };
   useEffect(() => {}, [s]);
