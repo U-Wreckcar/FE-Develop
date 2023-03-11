@@ -13,6 +13,7 @@
   --font-title-subhaed20: 20px;
   --font-title-headline16: 16px;
   --font-title-headline14: 14px;
+  --font-category: 16px;
   --font-body: 14px;
   --font-ception: 12px;
 
@@ -44,10 +45,25 @@ h2 {
 }
 
 h3 {
-  font-size: var(--font-body);
+  font-size: var(--font-title-headline16);
+  font-weight: var(--weight-bold);
+}
+h4 {
+  font-size: var(--font-title-headline14);
   font-weight: var(--weight-bold);
 }
 h5 {
+  font-size: var(--font-body);
+  font-weight: var(--weight-bold);
+}
+.category_text {
+  font-family: 'Pretendard';
+  font-size: var(--font-category);
+  font-weight: var(--weight-regular);
+  line-height: 24px;
+  letter-spacing: -0.006em;
+}
+p {
   font-size: var(--font-ception);
   font-weight: var(--weight-regular);
 }

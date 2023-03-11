@@ -1,9 +1,16 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './styles.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import { AddUtmModal } from './AddUtmModal';
 
+/**
+ * Image
+ */
+import myutm from 'assets/myutm.png';
+import createutm from 'assets/createutm.png';
+import addutm from 'assets/addutm.png';
+import icons from 'assets/icons.png';
 export type setSideProps = {
   setSide: Dispatch<SetStateAction<boolean>>;
   side: boolean;
@@ -11,7 +18,8 @@ export type setSideProps = {
 
 export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
   const [modal, setModal] = useState(false);
-
+  const location = useLocation();
+  const pathName = location.pathname;
   const customStyles = {
     content: {
       top: '50%',
@@ -35,23 +43,53 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
           <img></img>
           <button onClick={() => setSide(false)}>←</button>
         </div>
-        <div className={styles.title}></div>
+        <h3>MY UTM</h3>
         {/* <Link to="/">HOME</Link> */}
         {/* <Link to="/main">utm 관리</Link> */}
-        <div>
-          <Link to="/createutm">새 UTM 생성하기</Link>
-        </div>
-        {/* <Link to="/userinfo">유저정보</Link> */}
-        <div>
-          <p onClick={() => setModal(!modal)}>기존 UTM 추가하기</p>
-          <AddUtmModal
-            isOpen={modal}
-            onRequestClose={closeModal}
-            style={customStyles}
-          />
-        </div>
-        <div>
-          <Link to="/main"> UTM 관리하기</Link>
+
+        <div className={styles.category_box}>
+          <Link className={styles.linklink} to="/main">
+            <div
+              className={` ${
+                pathName === '/main' ? styles.active : styles.utm_category_item
+              } `}
+            >
+              <img
+                src={myutm}
+                alt="My-UTM"
+                onError={() => console.log('Image loading failed')}
+              />
+              <span className="category_text">UTM 관리하기</span>
+            </div>
+          </Link>
+          <Link
+            className={styles.linklink}
+            // style={{ textDecoration: 'none', color: 'd1d1d1' }}
+            to="/createutm"
+          >
+            <div
+              className={`${
+                pathName === '/createutm'
+                  ? styles.active
+                  : styles.utm_category_item
+              }`}
+            >
+              <img src={icons} alt="Create-UTM" />
+              <span className="category_text">새 UTM 생성하기</span>
+            </div>
+          </Link>
+          {/* <Link to="/userinfo">유저정보</Link> */}
+          <div className={styles.utm_category_item}>
+            <img src={addutm} alt="Add_UTM" />
+            <span className="category_text" onClick={() => setModal(!modal)}>
+              기존 UTM 추가하기
+            </span>
+            <AddUtmModal
+              isOpen={modal}
+              onRequestClose={closeModal}
+              style={customStyles}
+            />
+          </div>
         </div>
       </div>
       <div>

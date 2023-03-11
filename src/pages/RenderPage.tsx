@@ -1,4 +1,3 @@
-import FilterBox from 'components/filter_box/FilterBox';
 import { Modal } from 'shared/modal/Modal';
 function RenderPage() {
   const consoleHandler = () => {
@@ -12,7 +11,6 @@ function RenderPage() {
     <div>
       <h1>Headline 28px 마이 유렉카 Bold</h1>
       <p>렌더링페이지!</p>
-      <FilterBox />
 
       <Modal
         buttonName={'추출하기'}
