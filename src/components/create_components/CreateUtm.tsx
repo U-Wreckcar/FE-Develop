@@ -1,13 +1,12 @@
-// import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 /**
  * Util
  */
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { Control, useFieldArray, useForm, useWatch } from 'react-hook-form';
 
 // import styles from './styles.module.css';
 
-// import styles from './stylestest.module.css';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import styles from './stylestest.module.css';
 
 import { nanoid } from 'nanoid';
 /**
@@ -191,7 +190,19 @@ export const CreateUtm = () => {
           </button>
           <input className={styles.createBtn} type="submit" value="생성하기" />
         </div>
+        {/* <FirstNameWatched control={control} /> */}
       </form>
     </div>
   );
 };
+// interface FormInputs {
+//   firstName: string;
+// }
+// function FirstNameWatched({ control }: { control: Control<FormInputs> }) {
+//   const firstName = useWatch({
+//     control,
+//     name: 'firstName', // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
+//     defaultValue: 'default', // default value before the render
+//   });
+//   return <p>Watch: {firstName}</p>; // only re-render at the component level, when firstName changes
+// }

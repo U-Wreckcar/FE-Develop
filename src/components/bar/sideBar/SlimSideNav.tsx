@@ -28,7 +28,7 @@ export const SlimSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
     <div className={styles.slim_container}>
       <div>
         <div>
-          <img></img>
+          <img />
           <button onClick={() => setSide(true)}>→</button>
         </div>
         <div className={styles.title}></div>
