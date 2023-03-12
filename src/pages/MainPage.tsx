@@ -1,5 +1,5 @@
 import { MainBtnTable } from 'components/main_components/MainBtnTable';
-import { MainTable } from 'components/main_components/MainTable';
+import { MainTable } from 'components/main_components/Maintable';
 import { useState } from 'react';
 export default function MainPage() {
   const [summary, setSummary] = useState(true);

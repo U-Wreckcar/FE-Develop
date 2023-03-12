@@ -200,7 +200,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
@@ -357,7 +357,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                           <input
                             id={cell.id}
                             style={{ border: 'none' }}
-                            value={`${cell.getValue()}`}
+                            defaultValue={`${cell.getValue()}`}
                             onFocus={(e) => {
                               setTarget(e.target.id);
                               setShow(true);
@@ -367,11 +367,14 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         {cell.column.id === 'utm_memo' &&
                           show &&
                           target === cell.id && (
-                            <textarea
-                              value={`${cell.getValue()}`}
-                              onBlur={() => setShow(false)}
-                              onChange={onChangHandler}
-                            />
+                            <>
+                              <textarea
+                                defaultValue={`${cell.getValue()}`}
+                                onBlur={() => setShow(false)}
+                                onChange={onChangHandler}
+                              />
+                              <button>수정하기</button>
+                            </>
                           )}
                         {cell.column.id === 'utm_memo' &&
                           show &&

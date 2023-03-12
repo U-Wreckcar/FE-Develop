@@ -11,7 +11,9 @@ export const RenderHeader = () => {
         <div className={styles.render_nav_left_guide}>가이드</div>
       </div>
       <div className={styles.user_box}>
-        <p>로그인</p>
+        <Link to={'/login'}>
+          <p>로그인</p>
+        </Link>
       </div>
     </nav>
   );

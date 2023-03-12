@@ -1,3 +1,4 @@
+
 export type MainTableType = {
   id: number;
   created_at: string;
@@ -12,3 +13,4 @@ export type MainTableType = {
   full_url: string;
   shorten_url: string;
 };
+
