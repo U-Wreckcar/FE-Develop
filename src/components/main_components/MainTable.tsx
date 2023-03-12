@@ -437,6 +437,7 @@ function Filter({
 
   const columnFilterValue = column.getFilterValue();
   const [startDate, setStartDate] = useState<string | number>();
+  const [isOpen, setIsOpen] = useState(false);
 
   let data: Array<MainTableType> = [];
   instance('/utms').then((result) => (data = result.data));
@@ -466,22 +467,31 @@ function Filter({
   );
 
   return column.id === 'created_at' ? (
-    <div style={{ display: 'flex' }}>
-      <DebouncedInput
-        type="date"
-        value={(columnFilterValue ?? '') as string}
-        onChange={(value) => {
-          setStartDate(value);
-        }}
-        list={column.id + 'list'}
-      />
-      <DebouncedInput
-        type="date"
-        value={(columnFilterValue ?? '') as string}
-        onChange={(value) => getDatesStartToLast(startDate, value)}
-        list={column.id + 'list'}
-      />
-    </div>
+    <>
+      <input
+        placeholder="기간 선택하기"
+        onFocus={() => setIsOpen(true)}
+      ></input>
+      <dialog {...(isOpen && true ? { open: true } : {})}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <DebouncedInput
+            type="date"
+            value={(columnFilterValue ?? '') as string}
+            onChange={(value) => {
+              setStartDate(value);
+            }}
+            list={column.id + 'list'}
+          />
+          <DebouncedInput
+            type="date"
+            value={(columnFilterValue ?? '') as string}
+            onChange={(value) => getDatesStartToLast(startDate, value)}
+            list={column.id + 'list'}
+          />
+          <button onClick={() => setIsOpen(false)}>X</button>
+        </div>
+      </dialog>
+    </>
   ) : (
     <>
       <datalist id={column.id + 'list'}>

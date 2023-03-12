@@ -1,5 +1,43 @@
-button {
+.button {
     border: none;
     cursor: pointer;
     padding: 5px;
+}
+
+.alert {
+    width: 560px;
+    height: 90px;
+    background-color: #F5F9FC;
+    border: 1px solid #7D97FF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+.alert_left {
+    display: flex;
+}
+.alert_icon {
+    width: 25px;
+    height: 25px;
+}
+
+.alert > button {
+    border: none;
+    margin-right: 20px;
+}
+
+.alert_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: left
+}
+
+.alert_text > h5, p {
+    margin: 0;
 }
