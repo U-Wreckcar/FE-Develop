@@ -1,6 +1,7 @@
 img {
   width: 24px;
   height: 24px;
+
   margin-right: 10px;
   margin-left: 5px;
 }
@@ -20,6 +21,11 @@ h3 {
   width: 246px;
   /* background-color: black; */
 }
+.category_bottom_box {
+  display: flex;
+  flex-direction: column;
+  width: 246px;
+}
 .active {
   display: flex;
   padding: 0px;
@@ -38,9 +44,11 @@ h3 {
   height: 38px;
   margin-bottom: 10px;
 }
+
 .plus_container {
   width: 270px;
   height: 1080px;
+  min-height: 95%;
   background-color: #484bff;
   position: sticky;
   top: 0px;
@@ -49,7 +57,6 @@ h3 {
   flex-direction: column;
   align-items: baseline;
   padding-left: 12px;
-  /* padding-top: 142px ; */
   padding-bottom: 65px;
   justify-content: space-between;
   color: rgb(255, 255, 255);
@@ -57,10 +64,14 @@ h3 {
   font-weight: var(--weight-regular);
 }
 
+/*
+* Slim Side Bar
+*/
 .slim_container {
   width: 60px;
   height: 1080px;
-  background-color: rgb(158, 152, 152);
+  background-color: #484bff;
+
   position: sticky;
   top: 0px;
   float: left;
@@ -68,7 +79,47 @@ h3 {
   flex-direction: column;
   align-items: baseline;
   padding-left: 12px;
-  /* padding-top: 142px ; */
   padding-bottom: 65px;
   justify-content: space-between;
+}
+
+.slim_category_box {
+  position: absolute;
+  width: 50px;
+  height: 200px;
+  top: 9%;
+  left: 22%;
+  margin-top: 50px;
+}
+
+.slim_utm_category_item {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.slim_active {
+  position: relative;
+  top: 2px;
+  right: 2.5px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 3px 0 0 3px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #382ade;
+}
+.menu_button {
+  margin-top: 15px;
+}
+.slim_button {
+  margin-left: 152px;
+  margin-top: 15px;
 }

@@ -8,9 +8,13 @@ import { AddUtmModal } from './AddUtmModal';
  * Image
  */
 import myutm from 'assets/myutm.png';
-import createutm from 'assets/createutm.png';
 import addutm from 'assets/addutm.png';
-import icons from 'assets/icons.png';
+import createutm from 'assets/createutm.png';
+import slim from 'assets/slim.png';
+import help from 'assets/help.png';
+import noti from 'assets/noti.png';
+import guide from 'assets/guide.png';
+
 export type setSideProps = {
   setSide: Dispatch<SetStateAction<boolean>>;
   side: boolean;
@@ -40,12 +44,17 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
     <div className={styles.plus_container}>
       <div>
         <div>
-          <img></img>
-          <button onClick={() => setSide(false)}>←</button>
+          <img src="logo" alt="Logo" />
+          <button onClick={() => setSide(false)}>
+            <img
+              className={styles.slim_button}
+              src={slim}
+              alt="Slim Button"
+              onError={() => console.log('Image loading failed')}
+            />
+          </button>
         </div>
         <h3>MY UTM</h3>
-        {/* <Link to="/">HOME</Link> */}
-        {/* <Link to="/main">utm 관리</Link> */}
 
         <div className={styles.category_box}>
           <Link className={styles.linklink} to="/main">
@@ -74,7 +83,7 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
                   : styles.utm_category_item
               }`}
             >
-              <img src={icons} alt="Create-UTM" />
+              <img src={createutm} alt="Create-UTM" />
               <span className="category_text">새 UTM 생성하기</span>
             </div>
           </Link>
@@ -93,12 +102,33 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
         </div>
       </div>
       <div>
-        <h4>유렉카</h4>
-        <ul>
-          <li>공지사항</li>
-          <li>가이드</li>
-          <li>문의하기</li>
-        </ul>
+        <h3>유렉카</h3>
+        <div className={styles.category_bottom_box}>
+          <div className={styles.utm_category_item}>
+            <img
+              src={noti}
+              alt="Noti Img"
+              onError={() => console.log('Image loading failed')}
+            />
+            <span className="category_text">공지사항</span>
+          </div>
+          <div className={styles.utm_category_item}>
+            <img
+              src={guide}
+              alt="Guide Img"
+              onError={() => console.log('Image loading failed')}
+            />
+            <span className="category_text">가이드</span>
+          </div>
+          <div className={styles.utm_category_item}>
+            <img
+              src={help}
+              alt="Help Img"
+              onError={() => console.log('Image loading failed')}
+            />
+            <span className="category_text">문의하기</span>
+          </div>
+        </div>
       </div>
     </div>
   );
