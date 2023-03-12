@@ -7,9 +7,7 @@ import { Control, useFieldArray, useForm, useWatch } from 'react-hook-form';
 // import styles from './styles.module.css';
 import styles from './stylestest.module.css';
 import { nanoid } from 'nanoid';
-/**
- * Style
- */
+
 
 type UTMsType = {
   utms: {
