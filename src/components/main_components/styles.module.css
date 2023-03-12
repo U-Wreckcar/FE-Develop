@@ -1,5 +1,8 @@
 .container {
   display: flex;
+  width: 70vw;
+  max-height: 1080px;
+  overflow: scroll;
   flex-direction: column;
 }
 .btn_box {

@@ -16,7 +16,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
-  getPaginationRowModel,
   sortingFns,
   getSortedRowModel,
   FilterFn,
@@ -30,6 +29,7 @@ import {
   compareItems,
 } from '@tanstack/match-sorter-utils';
 import styles from './styles.module.css';
+import instance from 'util/async/axiosConfig';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -67,6 +67,7 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir;
 };
 
+let defaultData: Array<MainTableType> = [];
 export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [rowSelection, setRowSelection] = useState({});
   const [data, setData] = useState<Array<MainTableType>>([]);
@@ -79,9 +80,19 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const memo_ref = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    setData(getUTMRes.data);
+    if (defaultData.length === 0) {
+      setData(getUTMRes.data);
+    }
   }, [getUTMRes]);
+
+  useEffect(() => {
+    if (defaultData.length !== 0) {
+      setData(defaultData);
+    }
+  }, [defaultData]);
 
   const columns = useMemo<ColumnDef<MainTableType>[]>(
     () => [
@@ -219,7 +230,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
@@ -236,7 +247,12 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     }
   }, [table.getState().columnFilters[0]?.id]);
 
-  const onChangHandler = () => {};
+  const onChangHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(e.target.value);
+    if (memo_ref.current !== null) {
+      memo_ref.current.value = e.target.value;
+    }
+  };
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
     table.getSelectedRowModel().flatRows.map((row) => id.push(row?.original));
@@ -362,8 +378,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         {cell.column.id === 'utm_memo' && !show && (
                           <input
                             id={cell.id}
+                            ref={memo_ref}
                             style={{ border: 'none' }}
-                            value={`${cell.getValue()}`}
+                            defaultValue={`${cell.getValue()}`}
                             onFocus={(e) => {
                               setTarget(e.target.id);
                               setShow(true);
@@ -373,11 +390,14 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         {cell.column.id === 'utm_memo' &&
                           show &&
                           target === cell.id && (
-                            <textarea
-                              value={`${cell.getValue()}`}
-                              onBlur={() => setShow(false)}
-                              onChange={onChangHandler}
-                            />
+                            <>
+                              <textarea
+                                defaultValue={`${cell.getValue()}`}
+                                onBlur={() => setShow(false)}
+                                onChange={onChangHandler}
+                              />
+                              <button>수정하기</button>
+                            </>
                           )}
                         {cell.column.id === 'utm_memo' &&
                           show &&
@@ -416,7 +436,27 @@ function Filter({
     .flatRows[0]?.getValue(column.id);
 
   const columnFilterValue = column.getFilterValue();
+  const [startDate, setStartDate] = useState<string | number>();
 
+  let data: Array<MainTableType> = [];
+  instance('/utms').then((result) => (data = result.data));
+  function getDatesStartToLast(startDate: any, lastDate: any) {
+    const regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+    if (!(regex.test(startDate) && regex.test(lastDate)))
+      return 'Not Date Format';
+    let result: (string | number | Date)[] = [];
+    const curDate = new Date(startDate);
+    while (curDate <= new Date(lastDate)) {
+      result.push(
+        curDate.toISOString().split('T')[0].toString().replace(/-/g, '.')
+      );
+      curDate.setDate(curDate.getDate() + 1);
+    }
+    let dateList: any = [];
+    defaultData = data.filter((date) => result.includes(date.created_at));
+    defaultData.map((d) => dateList.push(d.created_at));
+    column.setFilterValue((old: Array<string>) => console.log(old));
+  }
   const sortedUniqueValues = React.useMemo(
     () =>
       typeof firstValue === 'number'
@@ -425,41 +465,22 @@ function Filter({
     [column.getFacetedUniqueValues()]
   );
 
-  return typeof firstValue === 'number' ? (
-    <div>
-      <div className="flex space-x-2">
-        <DebouncedInput
-          type="number"
-          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-          value={(columnFilterValue as [number, number])?.[0] ?? ''}
-          onChange={(value) =>
-            column.setFilterValue((old: [number, number]) => [value, old?.[1]])
-          }
-          placeholder={`Min ${
-            column.getFacetedMinMaxValues()?.[0]
-              ? `(${column.getFacetedMinMaxValues()?.[0]})`
-              : ''
-          }`}
-          className="w-24 border shadow rounded"
-        />
-        <DebouncedInput
-          type="number"
-          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-          value={(columnFilterValue as [number, number])?.[1] ?? ''}
-          onChange={(value) =>
-            column.setFilterValue((old: [number, number]) => [old?.[0], value])
-          }
-          placeholder={`Max ${
-            column.getFacetedMinMaxValues()?.[1]
-              ? `(${column.getFacetedMinMaxValues()?.[1]})`
-              : ''
-          }`}
-          className="w-24 border shadow rounded"
-        />
-      </div>
-      <div className="h-1" />
+  return column.id === 'created_at' ? (
+    <div style={{ display: 'flex' }}>
+      <DebouncedInput
+        type="date"
+        value={(columnFilterValue ?? '') as string}
+        onChange={(value) => {
+          setStartDate(value);
+        }}
+        list={column.id + 'list'}
+      />
+      <DebouncedInput
+        type="date"
+        value={(columnFilterValue ?? '') as string}
+        onChange={(value) => getDatesStartToLast(startDate, value)}
+        list={column.id + 'list'}
+      />
     </div>
   ) : (
     <>
@@ -473,8 +494,6 @@ function Filter({
         value={(columnFilterValue ?? '') as string}
         onChange={(value) => column.setFilterValue(value)}
         placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-        className="w-36 border shadow rounded"
-        list={column.id + 'list'}
       />
       <div className="h-1" />
     </>

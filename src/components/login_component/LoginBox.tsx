@@ -15,21 +15,26 @@ const LoginBox = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h1>Login</h1>
-        <p>U렉카와 함께 쉽고 빠른 업무를 느껴보세요!</p>
+        <h1 className={styles.title}>Login</h1>
+        <p className={styles.content}>
+          U렉카와 함께 쉽고 빠른 업무를 느껴보세요!
+        </p>
       </div>
       <div>
         <div>
+          <img />
           <button className={styles.kakao_btn} onClick={onClickKakaoBtn}>
             카카오로 1초만에 시작하기
           </button>
         </div>
         <div>
+          <img />
           <button className={styles.naver_btn} onClick={onClickNaverBtn}>
             네이버로 1초만에 시작하기
           </button>
         </div>
         <div>
+          <img />
           <button className={styles.google_btn} onClick={onClickGoogleBtn}>
             구글로 1초만에 시작하기
           </button>

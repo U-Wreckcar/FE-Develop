@@ -1,7 +1,28 @@
+import {useMemo} from "react"
+import {
+  Table,
+  Column,
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  ColumnResizeMode,
+  getFilteredRowModel,
+  ColumnFiltersState,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFacetedMinMaxValues,
+  getPaginationRowModel,
+  sortingFns,
+  getSortedRowModel,
+  FilterFn,
+  SortingFn,
+  FilterFns,
+} from '@tanstack/react-table';
 
 export type MainTableType = {
     id: number;
-    created_at: string;
+    created_at: string | number | Date
     utm_url: string;
     utm_campaign_id: string;
     utm_source: string;
@@ -13,4 +34,4 @@ export type MainTableType = {
     full_url: string;
     shorten_url: string;
   };
-  
+ 

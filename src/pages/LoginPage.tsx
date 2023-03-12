@@ -1,8 +1,9 @@
 import LoginBox from 'components/login_component/LoginBox';
+import styles from './styles.module.css';
 
 const LoginPage = () => {
   return (
-    <div>
+    <div className={styles.login_container}>
       <LoginBox />
     </div>
   );
