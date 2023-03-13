@@ -26,18 +26,22 @@
   --animation-duration: 370ms;
 }
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
+/* html {
+  height: 1080px;
+} */
 body {
   width: 100vw;
-  /* min-width: 1590px; */
   height: 100vh;
   margin: 0;
-  background-color: #f5fbff;
+  background-color: #f5f9fc;
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+button {
+  cursor: pointer;
 }
 h1 {
   font-size: var(--font-title-headline28);

@@ -11,7 +11,7 @@ import { nanoid } from 'nanoid';
 import styles from './styles.module.css';
 import plus from 'assets/plus.png';
 import minus from 'assets/minus.png';
-
+import createutm from 'assets/createutm.png';
 
 type UTMsType = {
   utms: {
@@ -94,16 +94,10 @@ export const CreateUtm = () => {
               <div key={field.id}>
                 <section key={field.id}>
                   <div className={styles.item_box}>
-                    <div className={styles.number}>
-                      {(index === 0 && 1) ||
-                        (index === 1 && 2) ||
-                        (index === 2 && 3) ||
-                        (index === 3 && 4) ||
-                        (index === 4 && 5)}
-                    </div>
+                    <div className={styles.number}>{index + 1}</div>
                     <div className={styles.scroll_input}>
                       <input
-                        placeholder="utm_url"
+                        // placeholder="utm_url"
                         onInput={requeirFn}
                         {...register(`utms.${index}.utm_url` as const, {
                           required: true,
@@ -114,7 +108,7 @@ export const CreateUtm = () => {
                         }, ${styles.input_style}`}
                       />
                       <input
-                        placeholder="utm_campaign_id"
+                        // placeholder="utm_campaign_id"
                         onInput={requeirFn}
                         {...register(`utms.${index}.utm_campaign_id` as const, {
                           required: true,
@@ -125,7 +119,7 @@ export const CreateUtm = () => {
                         }, ${styles.input_style}`}
                       />
                       <input
-                        placeholder="utm_source"
+                        // placeholder="utm_source"
                         onInput={requeirFn}
                         {...register(`utms.${index}.utm_source` as const, {
                           required: true,
@@ -137,7 +131,7 @@ export const CreateUtm = () => {
                       />
                       <input
                         onInput={requeirFn}
-                        placeholder="utm_medium"
+                        // placeholder="utm_medium"
                         {...register(`utms.${index}.utm_medium` as const, {
                           required: true,
                           pattern: /[a-z]/i,
@@ -148,7 +142,7 @@ export const CreateUtm = () => {
                       />
                       <input
                         onInput={requeirFn}
-                        placeholder="utm_campaign_name"
+                        // placeholder="utm_campaign_name"
                         {...register(
                           `utms.${index}.utm_campaign_name` as const,
                           {}
@@ -161,7 +155,7 @@ export const CreateUtm = () => {
                       />
                       <input
                         onInput={requeirFn}
-                        placeholder="utm_term"
+                        // placeholder="utm_term"
                         {...register(`utms.${index}.utm_term` as const, {})}
                         className={`${
                           errors?.utms?.[index]?.utm_url ? 'error' : ''
@@ -170,7 +164,7 @@ export const CreateUtm = () => {
 
                       <input
                         onInput={requeirFn}
-                        placeholder="utm_campaign_content"
+                        // placeholder="utm_campaign_content"
                         {...register(
                           `utms.${index}.utm_campaign_content` as const
                         )}
@@ -192,7 +186,7 @@ export const CreateUtm = () => {
                         className={styles.minus_button_style}
                         type="button"
                         onClick={() => {
-                          if (index === 1) {
+                          if (index >= 1) {
                             remove(index);
                           }
                         }}

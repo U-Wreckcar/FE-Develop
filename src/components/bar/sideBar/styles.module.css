@@ -2,8 +2,8 @@ img {
   width: 24px;
   height: 24px;
 
-  margin-right: 10px;
-  margin-left: 5px;
+  /* margin-right: 10px;
+  margin-left: 5px; */
 }
 .titleBox {
   margin: 100px 0 20px 10px;
@@ -13,8 +13,8 @@ img {
   width: 270px;
   height: 100vh;
   background-color: #484bff;
-  position: sticky;
-  top: 0px;
+  /* position: fixed;
+  top: 0px; */
   float: left;
   display: flex;
   flex-direction: column;
@@ -140,7 +140,7 @@ img {
   border: none;
 }
 
-.add_modal{
+.add_modal {
   width: 800px;
   height: 340px;
   text-align: center;
@@ -150,27 +150,27 @@ img {
   justify-content: center;
 }
 
-.modal_input{
+.modal_input {
   width: 650px;
   height: 44px;
-  border : 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 4px;
   margin-top: 40px;
   margin-bottom: 20px;
 }
 
-.modal_input_date{
+.modal_input_date {
   width: 142px;
   height: 44px;
-  border : 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 4px;
   margin-right: 26px;
 }
 
-.modal_input_memo{
+.modal_input_memo {
   width: 410px;
   height: 44px;
-  border : 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
@@ -184,21 +184,19 @@ img {
 }
 
 .add_button {
- 
-width: 81px;
-height: 38px;
+  width: 81px;
+  height: 38px;
 
-background: #484BFF;
-border: none;
-border-radius: 4px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 22px;
-letter-spacing: -0.006em;
+  background: #484bff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.006em;
 
-/* white */
-color: #FFFFFF;
-
+  /* white */
+  color: #ffffff;
 }
