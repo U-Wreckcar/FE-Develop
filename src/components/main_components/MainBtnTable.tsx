@@ -91,6 +91,8 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const input_ref = useRef<HTMLInputElement>(null);
+  const textarea_ref = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setData(getUTMRes.data);
@@ -339,14 +341,21 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         }}
                       >
                         {cell.column.id === 'full_url' && (
-                          <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                          <CopyButton
+                            style={styles.copy_button}
+                            text={`${cell.getValue()}`}
+                          ></CopyButton>
                         )}
                         {cell.column.id === 'shorten_url' && (
-                          <CopyButton text={`${cell.getValue()}`}></CopyButton>
+                          <CopyButton
+                            style={styles.copy_button}
+                            text={`${cell.getValue()}`}
+                          ></CopyButton>
                         )}
                         {cell.column.id === 'utm_url' && (
                           <Tooltip title={`${cell.getValue()}`}>
                             <button
+                              className={styles.url_button}
                               onClick={() => moveUrl(`${cell.getValue()}`)}
                             >
                               url 연결
@@ -356,6 +365,7 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         {cell.column.id === 'utm_memo' && !show && (
                           <input
                             id={cell.id}
+                            ref={input_ref}
                             style={{ border: 'none' }}
                             defaultValue={`${cell.getValue()}`}
                             onFocus={(e) => {
@@ -369,11 +379,14 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                           target === cell.id && (
                             <>
                               <textarea
+                                ref={textarea_ref}
                                 defaultValue={`${cell.getValue()}`}
                                 onBlur={() => setShow(false)}
                                 onChange={onChangHandler}
                               />
-                              <button>수정하기</button>
+                              <button className={styles.copy_button}>
+                                수정하기
+                              </button>
                             </>
                           )}
                         {cell.column.id === 'utm_memo' &&
