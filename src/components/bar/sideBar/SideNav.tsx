@@ -7,9 +7,9 @@ export const SideNav = () => {
   const [side, setSide] = useState(true);
   useEffect(() => {
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1100) {
         setSide(false);
-      } else if (window.innerWidth >= 768) {
+      } else if (window.innerWidth >= 1100) {
         setSide(true);
       }
     });

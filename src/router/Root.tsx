@@ -3,7 +3,7 @@ import { SideNav } from 'components/bar/sideBar/SideNav';
 import { useEffect, useState } from 'react';
 import { Header } from 'components/bar/header/Header';
 import { RenderHeader } from 'components/bar/header/RenderHeader';
-
+import styles from './styles.module.css';
 export const Root = () => {
   const [state, setState] = useState(false);
   const location = useLocation();
@@ -16,7 +16,7 @@ export const Root = () => {
     }
   }, [location]);
   return (
-    <div>
+    <>
       {state ? (
         <>
           <SideNav />
@@ -26,6 +26,6 @@ export const Root = () => {
         <RenderHeader />
       )}
       <Outlet />
-    </div>
+    </>
   );
 };
