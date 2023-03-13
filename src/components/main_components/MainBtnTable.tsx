@@ -223,7 +223,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
     window.open(url, '_blank');
   };
 
-  const onChangHandler = () => {};
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
     table.getSelectedRowModel().flatRows.map((row) => id.push(row?.original));
@@ -382,7 +381,6 @@ export const MainBtnTable: React.FC<MainTableProps> = ({ setSummary }) => {
                                 ref={textarea_ref}
                                 defaultValue={`${cell.getValue()}`}
                                 onBlur={() => setShow(false)}
-                                onChange={onChangHandler}
                               />
                               <button className={styles.copy_button}>
                                 수정하기

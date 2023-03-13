@@ -1,4 +1,11 @@
-import React, { HTMLProps, useMemo, useEffect, useState, useRef } from 'react';
+import React, {
+  HTMLProps,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
@@ -82,6 +89,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   );
   const input_ref = useRef<HTMLInputElement>(null);
   const textarea_ref = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState('');
   useEffect(() => {
     if (defaultData.length === 0) {
       setData(getUTMRes.data);
@@ -248,9 +256,8 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   }, [table.getState().columnFilters[0]?.id]);
 
   const onClickEditButton = () => {
-    if (textarea_ref.current !== null) {
-      console.log(textarea_ref.current.value);
-    }
+    console.log(textarea_ref?.current?.value);
+    setShow(false);
   };
 
   const onClickDelBtn = () => {
@@ -394,9 +401,12 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                               <textarea
                                 ref={textarea_ref}
                                 defaultValue={`${cell.getValue()}`}
-                                onBlur={() => setShow(false)}
+                                onChange={(e) => setValue(e.target.value)}
                               />
-                              <button onClick={onClickEditButton}>
+                              <button
+                                onClick={() => onClickEditButton()}
+                                className={styles.copy_button}
+                              >
                                 수정하기
                               </button>
                             </>
