@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  min-width: 1590px;
+  height: 245px;
+  background-color: var(--color-white-200);
+}
+.list_item {
+  width: 100%;
+  border-bottom: 1px solid #dfdfdf;
+}
+.filter_tag {
+  width: 150px;
+  color: rgb(29, 29, 29);
+  background-color: var(--color-white-200);
+}

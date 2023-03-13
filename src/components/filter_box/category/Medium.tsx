@@ -1,7 +1,5 @@
 import React from 'react';
-import { FButton } from '../shared/FButton';
-import { IButton } from '../shared/IButton';
-import { FInput } from '../shared/FInput';
+
 import styles from './categoryStyles.module.css';
 export const Medium = () => {
   const mockKeyWord = [
@@ -15,13 +13,15 @@ export const Medium = () => {
     <div className={styles.container}>
       <div className="category_tilte category_layout">미디움</div>
       <div>
-        <FInput />
-        <FButton />
+        <input />
+        <button>버튼</button>
       </div>
 
       <div>
         {mockKeyWord.map((i, idx) => (
-          <IButton key={idx} item={i} />
+          <div key={idx}>
+            <button>{i}</button>
+          </div>
         ))}
       </div>
     </div>

@@ -1,11 +1,12 @@
+import 'index.css';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { router } from 'router/Router';
-import 'index.css';
 import App from './App';
 import { store } from 'redux/store/store';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,10 +15,13 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient();
 root.render(
   <>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <App />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <App />
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   </>
 );
 

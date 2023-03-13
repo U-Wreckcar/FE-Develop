@@ -1,12 +1,10 @@
 import LoginBox from 'components/login_component/LoginBox';
-import TestTable from 'components/login_component/TestTable';
+import styles from './styles.module.css';
 
 const LoginPage = () => {
   return (
-    <div>
-      login Page
+    <div className={styles.login_container}>
       <LoginBox />
-      <TestTable />
     </div>
   );
 };

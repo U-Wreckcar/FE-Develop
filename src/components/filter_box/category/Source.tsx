@@ -1,9 +1,12 @@
-import React from 'react';
-import { FButton } from 'components/filter_box/shared/FButton';
-import { FInput } from 'components/filter_box/shared/FInput';
-import { IButton } from 'components/filter_box/shared/IButton';
+import { FormEvent, useRef } from 'react';
+import { addFilterItem, setAddFilterItem } from 'redux/slice/filterSlice';
+import { useAppDispatch } from 'util/reduxType/type';
 import styles from './categoryStyles.module.css';
 export const Source = () => {
+  const dispatch = useAppDispatch();
+  const sourceRef = useRef<HTMLInputElement>(null);
+  const sourceBtnRef = useRef<HTMLButtonElement>(null);
+
   const mockKeyWord = [
     'Facebook ',
     'Instagram',
@@ -11,17 +14,39 @@ export const Source = () => {
     'Naver',
     'WhatsApp',
   ];
+  const keyWordHandler = (e: FormEvent) => {
+    e.preventDefault();
+    const refValue = sourceRef.current?.value;
+    console.log(refValue);
+  };
+  const sourceBtn = (e: any) => {
+    const btnValue = e.target?.value;
+    const dispatchValue: any = {
+      utm_source: btnValue,
+    };
+    dispatch(setAddFilterItem(dispatchValue));
+    // dispatch(addFilterItem(dispatchValue));
+  };
   return (
     <div className={styles.container}>
-      <div className="category_tilte category_layout">소스</div>
-      <div>
-        <FInput />
-        <FButton />
-      </div>
+      <form onSubmit={keyWordHandler}>
+        <div className="category_tilte category_layout">소스</div>
+        <div>
+          <input type="text" ref={sourceRef} />
+          <button>확인</button>
+        </div>
+      </form>
 
       <div>
         {mockKeyWord.map((i, idx) => (
-          <IButton key={idx} item={i} />
+          <div key={idx}>
+            <input
+              type="button"
+              name={`${idx}`}
+              value={i}
+              onClick={sourceBtn}
+            />
+          </div>
         ))}
       </div>
     </div>

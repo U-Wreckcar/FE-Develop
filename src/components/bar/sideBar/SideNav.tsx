@@ -1,14 +1,26 @@
-import React from 'react';
-import styles from './stsidenav.module.css';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { PlusSideNav } from './PlusSideNav';
+import { SlimSideNav } from './SlimSideNav';
+import styles from './styles.module.css';
+
 export const SideNav = () => {
+  const [side, setSide] = useState(true);
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 1100) {
+        setSide(false);
+      } else if (window.innerWidth >= 1100) {
+        setSide(true);
+      }
+    });
+  }, []);
   return (
     <div>
-      <div className={styles.title}></div>
-      <Link to="/">HOME</Link>
-      <Link to="/main">utm 관리</Link>
-      <Link to="/createutm">utm 생성하기</Link>
-      <Link to="/userinfo">유저정보</Link>
+      {side ? (
+        <PlusSideNav setSide={setSide} side={side} />
+      ) : (
+        <SlimSideNav setSide={setSide} side={side} />
+      )}
     </div>
   );
 };

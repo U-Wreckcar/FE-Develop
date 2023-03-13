@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CreateAt } from 'components/filter_box/category/CreateAt';
 import { Source } from 'components/filter_box/category/Source';
 import { Medium } from 'components/filter_box/category/Medium';
 import { KeyWord } from 'components/filter_box/category/KeyWord';
-import styles from './filterBox.module.css';
-export default function FilterBox() {
+// import styles from './styles.module.css';
+import styles from './stylesTest.module.css';
+import { useAppSelector } from 'util/reduxType/type';
+const FilterBox: React.FC = () => {
+  const res = useAppSelector((state) => state.filter.tag);
+  console.log(res);
   const cadsf = [<CreateAt />, <Source />, <Medium />, <KeyWord />];
 
   return (
@@ -16,6 +20,26 @@ export default function FilterBox() {
           </div>
         );
       })}
+
+      <div>{res?.create_st}</div>
+      <div>{res?.utm_source}</div>
+      <div>{res?.keyword_target}</div>
+      {/* {res?.map((item, idx) => {
+        if (item.utm_source) {
+          const sourceMapValue = item.utm_source;
+          return `소스 : ${sourceMapValue}`;
+        } else if (item.date_scope) {
+          return `생성 일자 :${item.date_scope}`;
+        } else {
+          return (
+            <div key={idx}>
+              <div className={styles.filter_tag}>{item.date_scope}</div>
+              <div className={styles.filter_tag}>{item.utm_source}</div>
+            </div>
+          );
+        }
+      })} */}
     </div>
   );
-}
+};
+export default FilterBox;

@@ -3,7 +3,8 @@
   "tapWidth": 2,
   "singleQuote": true,
   "arrowParens": "always",
-  "parser": "typescript",
+  "trailingComma": "es5",
+  "endOfLine": "lf",
   "semi": true,
   "bracketSpacing": true
 }
