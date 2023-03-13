@@ -1,4 +1,11 @@
-import React, { HTMLProps, useMemo, useEffect, useState, useRef } from 'react';
+import React, {
+  HTMLProps,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import { MainTableType } from './TableData';
 import { useGetUtm } from 'util/hooks/useAsync';
 import { getUTMs } from 'util/async/api';
@@ -80,8 +87,9 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const memo_ref = useRef<HTMLInputElement>(null);
-
+  const input_ref = useRef<HTMLInputElement>(null);
+  const textarea_ref = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState('');
   useEffect(() => {
     if (defaultData.length === 0) {
       setData(getUTMRes.data);
@@ -247,12 +255,11 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
     }
   }, [table.getState().columnFilters[0]?.id]);
 
-  const onChangHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
-    if (memo_ref.current !== null) {
-      memo_ref.current.value = e.target.value;
-    }
+  const onClickEditButton = () => {
+    console.log(textarea_ref?.current?.value);
+    setShow(false);
   };
+
   const onClickDelBtn = () => {
     let id: Array<MainTableType> = [];
     table.getSelectedRowModel().flatRows.map((row) => id.push(row?.original));
@@ -378,7 +385,7 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                         {cell.column.id === 'utm_memo' && !show && (
                           <input
                             id={cell.id}
-                            ref={memo_ref}
+                            ref={input_ref}
                             style={{ border: 'none' }}
                             defaultValue={`${cell.getValue()}`}
                             onFocus={(e) => {
@@ -392,11 +399,16 @@ export const MainTable: React.FC<MainTableProps> = ({ setSummary }) => {
                           target === cell.id && (
                             <>
                               <textarea
+                                ref={textarea_ref}
                                 defaultValue={`${cell.getValue()}`}
-                                onBlur={() => setShow(false)}
-                                onChange={onChangHandler}
+                                onChange={(e) => setValue(e.target.value)}
                               />
-                              <button>수정하기</button>
+                              <button
+                                onClick={() => onClickEditButton()}
+                                className={styles.copy_button}
+                              >
+                                수정하기
+                              </button>
                             </>
                           )}
                         {cell.column.id === 'utm_memo' &&
@@ -437,6 +449,7 @@ function Filter({
 
   const columnFilterValue = column.getFilterValue();
   const [startDate, setStartDate] = useState<string | number>();
+  const [isOpen, setIsOpen] = useState(false);
 
   let data: Array<MainTableType> = [];
   instance('/utms').then((result) => (data = result.data));
@@ -465,37 +478,61 @@ function Filter({
     [column.getFacetedUniqueValues()]
   );
 
-  return column.id === 'created_at' ? (
-    <div style={{ display: 'flex' }}>
-      <DebouncedInput
-        type="date"
-        value={(columnFilterValue ?? '') as string}
-        onChange={(value) => {
-          setStartDate(value);
-        }}
-        list={column.id + 'list'}
-      />
-      <DebouncedInput
-        type="date"
-        value={(columnFilterValue ?? '') as string}
-        onChange={(value) => getDatesStartToLast(startDate, value)}
-        list={column.id + 'list'}
-      />
-    </div>
-  ) : (
+  return (
     <>
-      <datalist id={column.id + 'list'}>
-        {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-          <option value={value} key={value} />
-        ))}
-      </datalist>
-      <DebouncedInput
-        type="text"
-        value={(columnFilterValue ?? '') as string}
-        onChange={(value) => column.setFilterValue(value)}
-        placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-      />
-      <div className="h-1" />
+      {column.id === 'created_at' && (
+        <>
+          <input
+            className={styles.search_input}
+            placeholder="기간 선택하기"
+            onFocus={() => setIsOpen(true)}
+          ></input>
+          <dialog
+            className={styles.dialog}
+            {...(isOpen && true ? { open: true } : {})}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <DebouncedInput
+                type="date"
+                value={(columnFilterValue ?? '') as string}
+                onChange={(value) => {
+                  setStartDate(value);
+                }}
+                list={column.id + 'list'}
+              />
+              <DebouncedInput
+                type="date"
+                value={(columnFilterValue ?? '') as string}
+                onChange={(value) => getDatesStartToLast(startDate, value)}
+                list={column.id + 'list'}
+              />
+              <button
+                className={styles.dialog_button}
+                onClick={() => setIsOpen(false)}
+              >
+                X
+              </button>
+            </div>
+          </dialog>
+        </>
+      )}
+      {column.id !== 'created_at' && (
+        <>
+          <datalist id={column.id + 'list'}>
+            {sortedUniqueValues.slice(0, 5000).map((value: any) => (
+              <option value={value} key={value} />
+            ))}
+          </datalist>
+          <DebouncedInput
+            className={styles.search_input}
+            type="text"
+            value={(columnFilterValue ?? '') as string}
+            onChange={(value) => column.setFilterValue(value)}
+            placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
+          />
+          <div className="h-1" />
+        </>
+      )}
     </>
   );
 }
