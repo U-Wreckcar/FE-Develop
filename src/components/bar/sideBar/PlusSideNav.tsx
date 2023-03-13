@@ -45,7 +45,10 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
       <div>
         <div>
           <img src="logo" alt="Logo" />
-          <button onClick={() => setSide(false)}>
+          <button
+            className={styles.slim_button_style}
+            onClick={() => setSide(false)}
+          >
             <img
               className={styles.slim_button}
               src={slim}
@@ -54,7 +57,9 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
             />
           </button>
         </div>
-        <h3>MY UTM</h3>
+        <div className={styles.titleBox}>
+          <h3>MY UTM</h3>
+        </div>
 
         <div className={styles.category_box}>
           <Link className={styles.linklink} to="/main">
@@ -102,7 +107,8 @@ export const PlusSideNav: React.FC<setSideProps> = ({ setSide, side }) => {
         </div>
       </div>
       <div>
-        <h3>유렉카</h3>
+        {/* <div className={styles.sidebar_section}></div> */}
+        <h3 className={styles.urc_category}>유렉카</h3>
         <div className={styles.category_bottom_box}>
           <div className={styles.utm_category_item}>
             <img

@@ -5,8 +5,26 @@ img {
   margin-right: 10px;
   margin-left: 5px;
 }
-h3 {
+.titleBox {
   margin: 100px 0 20px 10px;
+}
+
+.plus_container {
+  width: 270px;
+  height: 100vh;
+  background-color: #484bff;
+  position: sticky;
+  top: 0px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding-left: 12px;
+
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  font-size: var(--font-title-headline16);
+  font-weight: var(--weight-regular);
 }
 .linklink {
   text-decoration: none;
@@ -16,14 +34,22 @@ h3 {
 }
 .category_box {
   position: absolute;
+  top: 140px;
   display: flex;
   flex-direction: column;
   width: 246px;
-  /* background-color: black; */
+}
+.titleBox {
+  position: relative;
+  top: -50px;
+  width: 200px;
+  height: 100px;
+  /* background-color: #ffffff; */
 }
 .category_bottom_box {
   display: flex;
   flex-direction: column;
+  margin-left: 4px;
   width: 246px;
 }
 .active {
@@ -44,24 +70,8 @@ h3 {
   height: 38px;
   margin-bottom: 10px;
 }
-
-.plus_container {
-  width: 270px;
-  height: 1080px;
-  min-height: 95%;
-  background-color: #484bff;
-  position: sticky;
-  top: 0px;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  padding-left: 12px;
-  padding-bottom: 65px;
-  justify-content: space-between;
-  color: rgb(255, 255, 255);
-  font-size: var(--font-title-headline16);
-  font-weight: var(--weight-regular);
+.urc_category {
+  margin: 15px;
 }
 
 /*
@@ -69,7 +79,7 @@ h3 {
 */
 .slim_container {
   width: 60px;
-  height: 1080px;
+  height: 100vh;
   background-color: #484bff;
 
   position: sticky;
@@ -77,9 +87,7 @@ h3 {
   float: left;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
-  padding-left: 12px;
-  padding-bottom: 65px;
+
   justify-content: space-between;
 }
 
@@ -118,10 +126,18 @@ h3 {
 }
 .menu_button {
   margin-top: 15px;
+  border: none;
 }
 .slim_button {
+  border: none;
   margin-left: 152px;
   margin-top: 15px;
+}
+.slim_button_style {
+  border: none;
+}
+.menu_button_style {
+  border: none;
 }
 
 .add_modal{
