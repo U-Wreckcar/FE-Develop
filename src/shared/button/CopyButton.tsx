@@ -20,7 +20,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ style, text }) => {
     }
   };
   return (
-    <button className={styles.button} onClick={onClickCopyBtn}>
+    <button className={styles.copy_button} onClick={onClickCopyBtn}>
       복사하기
     </button>
   );

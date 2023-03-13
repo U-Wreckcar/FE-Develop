@@ -1,17 +1,18 @@
 import React from 'react';
-import { getUTMs } from 'util/async/api';
-import { useGetUtm } from 'util/hooks/useAsync';
 import { CreateUtm } from 'components/create_components/CreateUtm';
 import { CreateCategory } from 'components/create_components/CreateCategory';
 import { CreateCopyBox } from 'components/create_components/CreateCopyBox';
+import styles from './styles.module.css';
 export default function CreatePage() {
-  const res = useGetUtm(getUTMs);
-  console.log(res);
   return (
-    <>
+    <div className={styles.create_container}>
+      <h1>새 UTM 생성하기</h1>
+      <span className="category_text">
+        UTM은 최대 5개까지 생성할 수 있습니다.
+      </span>
       <CreateCategory />
       <CreateUtm />
       <CreateCopyBox />
-    </>
+    </div>
   );
 }

@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 /**
  * Util
  */
-import { Control, useFieldArray, useForm, useWatch } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 
-// import styles from './styles.module.css';
-import styles from './stylestest.module.css';
 import { nanoid } from 'nanoid';
 /**
- * Style
+ * Style, Image
  */
+import styles from './styles.module.css';
+import plus from 'assets/plus.png';
+import minus from 'assets/minus.png';
 
 type UTMsType = {
   utms: {
@@ -86,12 +87,12 @@ export const CreateUtm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.container}>
+        <div className={styles.create_container}>
           {fields.map((field, index) => {
             return (
               <div key={field.id}>
                 <section key={field.id}>
-                  <div className={styles.itemBox}>
+                  <div className={styles.item_box}>
                     <div className={styles.number}>
                       {(index === 0 && 1) ||
                         (index === 1 && 2) ||
@@ -99,80 +100,111 @@ export const CreateUtm = () => {
                         (index === 3 && 4) ||
                         (index === 4 && 5)}
                     </div>
+                    <div className={styles.scroll_input}>
+                      <input
+                        placeholder="utm_url"
+                        onInput={requeirFn}
+                        {...register(`utms.${index}.utm_url` as const, {
+                          required: true,
+                          pattern: /[a-z]/i,
+                        })}
+                        className={`${
+                          errors?.utms?.[index]?.utm_url ? 'error' : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <input
+                        placeholder="utm_campaign_id"
+                        onInput={requeirFn}
+                        {...register(`utms.${index}.utm_campaign_id` as const, {
+                          required: true,
+                          pattern: /[a-z]/i,
+                        })}
+                        className={`${
+                          errors?.utms?.[index]?.utm_campaign_id ? 'error' : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <input
+                        placeholder="utm_source"
+                        onInput={requeirFn}
+                        {...register(`utms.${index}.utm_source` as const, {
+                          required: true,
+                          pattern: /[a-z]/i,
+                        })}
+                        className={`${
+                          errors?.utms?.[index]?.utm_source ? 'error' : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <input
+                        onInput={requeirFn}
+                        placeholder="utm_medium"
+                        {...register(`utms.${index}.utm_medium` as const, {
+                          required: true,
+                          pattern: /[a-z]/i,
+                        })}
+                        className={`${
+                          errors?.utms?.[index]?.utm_medium ? 'error' : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <input
+                        onInput={requeirFn}
+                        placeholder="utm_campaign_name"
+                        {...register(
+                          `utms.${index}.utm_campaign_name` as const,
+                          {}
+                        )}
+                        className={`${
+                          errors?.utms?.[index]?.utm_campaign_name
+                            ? 'error'
+                            : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <input
+                        onInput={requeirFn}
+                        placeholder="utm_term"
+                        {...register(`utms.${index}.utm_term` as const, {})}
+                        className={`${
+                          errors?.utms?.[index]?.utm_url ? 'error' : ''
+                        }, ${styles.input_style}`}
+                      />
 
-                    <input
-                      placeholder="utm_url"
-                      onInput={requeirFn}
-                      {...register(`utms.${index}.utm_url` as const, {
-                        required: true,
-                        pattern: /[a-z]/i,
-                      })}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-                    <input
-                      placeholder="utm_campaign_id"
-                      onInput={requeirFn}
-                      {...register(`utms.${index}.utm_campaign_id` as const, {
-                        required: true,
-                        pattern: /[a-z]/i,
-                      })}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-                    <input
-                      placeholder="utm_source"
-                      onInput={requeirFn}
-                      {...register(`utms.${index}.utm_source` as const, {
-                        required: true,
-                        pattern: /[a-z]/i,
-                      })}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-                    <input
-                      onInput={requeirFn}
-                      placeholder="utm_medium"
-                      {...register(`utms.${index}.utm_medium` as const, {
-                        required: true,
-                        pattern: /[a-z]/i,
-                      })}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-                    <input
-                      onInput={requeirFn}
-                      placeholder="utm_campaign_name"
-                      {...register(
-                        `utms.${index}.utm_campaign_name` as const,
-                        {}
-                      )}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-                    <input
-                      onInput={requeirFn}
-                      placeholder="utm_term"
-                      {...register(`utms.${index}.utm_term` as const, {})}
-                      className={errors?.utms?.[index]?.utm_url ? 'error' : ''}
-                    />
-
-                    <input
-                      onInput={requeirFn}
-                      placeholder="utm_campaign_content"
-                      {...register(
-                        `utms.${index}.utm_campaign_content` as const
-                      )}
-                      className={
-                        errors?.utms?.[index]?.utm_campaign_content
-                          ? 'error'
-                          : ''
-                      }
-                    />
-                    <textarea
-                      className={styles.active}
-                      {...register(`utms.${index}.utm_memo` as const, {
-                        maxLength: 80,
-                      })}
-                    />
-                    <div className={styles.removeBtn}>
-                      <button type="button" onClick={() => remove(index)}>
-                        -
+                      <input
+                        onInput={requeirFn}
+                        placeholder="utm_campaign_content"
+                        {...register(
+                          `utms.${index}.utm_campaign_content` as const
+                        )}
+                        className={`${
+                          errors?.utms?.[index]?.utm_campaign_content
+                            ? 'error'
+                            : ''
+                        }, ${styles.input_style}`}
+                      />
+                      <textarea
+                        className={styles.active}
+                        {...register(`utms.${index}.utm_memo` as const, {
+                          maxLength: 80,
+                        })}
+                      />
+                    </div>
+                    <div className={styles.minus_button}>
+                      <button
+                        className={styles.minus_button_style}
+                        type="button"
+                        onClick={() => {
+                          if (index === 1) {
+                            remove(index);
+                          }
+                        }}
+                      >
+                        <img
+                          src={minus}
+                          alt="리스트 삭제"
+                          onError={() => {
+                            console.log(
+                              '리스트 빼기 이미지를 불러올 수 없습니다.'
+                            );
+                          }}
+                        />
                       </button>
                     </div>
                   </div>
@@ -181,11 +213,26 @@ export const CreateUtm = () => {
             );
           })}
         </div>
-        <div className={styles.buttonBox}>
-          <button className={styles.addListBtn} type="button" onClick={addList}>
-            +
+        <div className={styles.create_button_box}>
+          <button
+            className={styles.add_list_button}
+            type="button"
+            onClick={addList}
+          >
+            <img
+              className={styles.plus_button_img}
+              src={plus}
+              alt="추가하기"
+              onError={() => {
+                console.log('추가버튼 이미지를 불러오지 못했습니다.');
+              }}
+            />
           </button>
-          <input className={styles.createBtn} type="submit" value="생성하기" />
+          <input
+            className={styles.create_button}
+            type="submit"
+            value="생성하기"
+          />
         </div>
         {/* <FirstNameWatched control={control} /> */}
       </form>
